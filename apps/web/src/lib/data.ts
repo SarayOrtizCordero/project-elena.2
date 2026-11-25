@@ -7,8 +7,9 @@ export const WHATSAPP_URL = "https://wa.me/34600000000?text=Hola%20Elena%2C%20qu
 export const nav = [
   { href: "#servicios", label: "Servicios" },
   { href: "#metodo", label: "Método" },
+  { href: "#app", label: "App" },
   { href: "#planes", label: "Planes" },
-  { href: "#resultados", label: "Resultados" },
+  { href: "#galeria", label: "Galería" },
   { href: "#faq", label: "Dudas" },
 ];
 
@@ -25,6 +26,8 @@ export const services = [
     id: "presencial",
     title: "Presencial",
     tag: "En el gym",
+    photo: "/photos/trainer.jpg",
+    alt: "Entrenador guiando a una mujer en una máquina de remo",
     blurb: "Sesiones en sala con corrección técnica en directo, ritmo marcado y motivación real a tu lado.",
     points: ["Sesiones 1:1 o en grupo reducido", "Técnica corregida al momento", "Valoración física inicial", "Plan de nutrición incluido"],
   },
@@ -32,6 +35,8 @@ export const services = [
     id: "online",
     title: "Online",
     tag: "Desde donde estés",
+    photo: "/photos/online.jpg",
+    alt: "Mujer consultando su móvil en un gimnasio",
     blurb: "Tu rutina, tus comidas y tu progreso en una app. Elena ajusta tu plan cada semana según tus datos.",
     points: ["Rutina con vídeos de cada ejercicio", "Plan de comidas y calorías", "Seguimiento semanal personalizado", "Chat directo con Elena"],
   },
@@ -98,4 +103,27 @@ export const faqs = [
   { q: "¿Cómo recibo mi plan?", a: "Rellenas el cuestionario y en 24-48 h lo tienes en tu app, con rutina, comidas y lista de la compra." },
   { q: "¿Se puede cancelar?", a: "Sí, sin permanencia. Avisas con unos días de antelación y no se renueva." },
   { q: "¿Qué pasa si tengo una lesión?", a: "Me lo cuentas en el cuestionario y adapto los ejercicios. Si hace falta, te recomiendo consultar antes con tu médico." },
+];
+
+export const gallery = [
+  { src: "/photos/group.jpg", alt: "Grupo de mujeres haciendo sentadillas en un estudio con ventanales", label: "Clases en grupo", cls: "col-span-2 row-span-2" },
+  { src: "/photos/legs.jpg", alt: "Piernas de una mujer subiendo en una máquina de cardio", label: "Cardio", cls: "row-span-2" },
+  { src: "/photos/mirror.jpg", alt: "Dos mujeres levantando mancuernas frente al espejo", label: "Fuerza", cls: "row-span-2" },
+  { src: "/photos/class.jpg", alt: "Mujer sonriendo con una mancuerna en alto durante una clase", label: "Energía", cls: "col-span-2" },
+  { src: "/photos/strong.jpg", alt: "Mujer estirando los brazos en un estudio de entrenamiento", label: "Movilidad", cls: "" },
+  { src: "/photos/coach.jpg", alt: "Entrenador corrigiendo la postura de una mujer sentada", label: "Técnica", cls: "" },
+];
+
+export const appPoints = [
+  { title: "Tu entreno del día", text: "Marca cada serie y usa el temporizador de descanso entre ejercicios." },
+  { title: "Comidas y calorías", text: "Tu plan de comidas con calorías y macros. Añade lo que comas fuera de plan." },
+  { title: "Progreso a la vista", text: "Registra tu peso y mira tu evolución en una gráfica clara." },
+  { title: "Elena te acompaña", text: "Ella ve tu progreso y ajusta tu plan cuando lo necesitas." },
+];
+
+/** Instalar la app = añadirla a la pantalla de inicio desde el navegador (PWA), sin tiendas. */
+export const installSteps = [
+  { os: "Android", how: "En Chrome: menú ⋮ → «Instalar app»." },
+  { os: "iPhone", how: "En Safari: botón Compartir → «Añadir a pantalla de inicio»." },
+  { os: "Ordenador", how: "En Chrome o Edge: icono de instalar en la barra de direcciones." },
 ];

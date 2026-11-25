@@ -1,6 +1,7 @@
 import { Check, Dumbbell, Smartphone, Star } from "lucide-react";
-import { Placeholder, Reveal, RevealText } from "@elena/ui";
-import { marquee, services, steps, testimonials, transformations } from "@/lib/data";
+import { Reveal, RevealText } from "@elena/ui";
+import { gallery, marquee, services, steps, testimonials } from "@/lib/data";
+import { Photo } from "./photo";
 
 export function Marquee() {
   const items = [...marquee, ...marquee];
@@ -37,7 +38,8 @@ export function Services() {
       <div className="grid gap-5 md:grid-cols-2">
         {services.map((s, i) => (
           <Reveal key={s.id} delay={i * 0.12}>
-            <article className="group h-full rounded-3xl border border-line bg-ink-2 p-7 transition duration-300 hover:border-volt/50 sm:p-9">
+            <article className="group h-full overflow-hidden rounded-3xl border border-line bg-ink-2 p-7 transition duration-300 hover:border-volt/50 sm:p-9">
+              <Photo src={s.photo} alt={s.alt} sizes="(min-width: 768px) 50vw, 100vw" className="-mx-7 -mt-7 mb-7 aspect-[16/9] sm:-mx-9 sm:-mt-9 sm:mb-8" />
               <div className="mb-8 flex items-center justify-between">
                 <span className="grid size-14 place-items-center rounded-2xl bg-volt text-ink">
                   {s.id === "online" ? <Smartphone className="size-7" /> : <Dumbbell className="size-7" />}
@@ -90,43 +92,33 @@ export function Method() {
   );
 }
 
-export function Results() {
+export function Gallery() {
   return (
-    <section id="resultados" className="mx-auto max-w-6xl px-5 py-28">
-      <SectionTitle kicker="Resultados" title="Personas reales, *cambios reales*" />
-      <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 no-scrollbar md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0">
-        {transformations.map((t, i) => (
-          <Reveal key={t.name} delay={i * 0.12} className="w-[82%] shrink-0 snap-center md:w-auto">
-            <article className="overflow-hidden rounded-3xl border border-line bg-ink-2">
-              <div className="grid grid-cols-2 gap-px bg-line">
-                <div className="relative">
-                  <Placeholder label="Antes" ratio="3/4" />
-                  <span className="absolute left-3 top-3 rounded-full bg-ink/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest">
-                    Antes
-                  </span>
-                </div>
-                <div className="relative">
-                  <Placeholder label="Después" ratio="3/4" tone="volt" />
-                  <span className="absolute left-3 top-3 rounded-full bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-volt">
-                    Después
-                  </span>
-                </div>
-              </div>
-              <div className="flex items-end justify-between p-5">
-                <div>
-                  <p className="font-display text-3xl leading-none text-volt">{t.result}</p>
-                  <p className="mt-1 text-sm text-mute">
-                    {t.name} · {t.time}
-                  </p>
-                </div>
-                <span className="rounded-full border border-line px-3 py-1 text-xs text-mute">{t.mode}</span>
-              </div>
-            </article>
-          </Reveal>
+    <section id="galeria" className="mx-auto max-w-6xl px-5 py-28">
+      <SectionTitle kicker="Galería" title="Así se *entrena* aquí" />
+      <ul className="grid auto-rows-[150px] grid-cols-2 gap-3 sm:auto-rows-[200px] md:grid-cols-4 md:gap-4">
+        {gallery.map((g, i) => (
+          <li key={g.src} className={`min-h-0 ${g.cls}`}>
+            <Reveal delay={(i % 3) * 0.1} className="size-full">
+              <figure className="group relative size-full overflow-hidden rounded-2xl border border-line">
+                <Photo
+                  src={g.src}
+                  alt={g.alt}
+                  tone={i === 0 ? "yellow" : "mono"}
+                  sizes="(min-width: 768px) 25vw, 50vw"
+                  className="size-full"
+                  imgClassName="transition-transform duration-700 group-hover:scale-105"
+                />
+                <figcaption className="absolute bottom-3 left-3 rounded-full bg-ink/85 px-3 py-1 text-xs font-bold uppercase tracking-widest backdrop-blur">
+                  {g.label}
+                </figcaption>
+              </figure>
+            </Reveal>
+          </li>
         ))}
-      </div>
+      </ul>
       <Reveal y={8}>
-        <p className="mt-4 text-xs text-mute">Imágenes y datos provisionales de demostración.</p>
+        <p className="mt-4 text-xs text-mute">Fotografías de stock provisionales. Se sustituirán por imágenes reales de Elena.</p>
       </Reveal>
     </section>
   );
@@ -138,7 +130,7 @@ export function About() {
       <div className="mx-auto grid max-w-6xl items-center gap-14 px-5 py-28 md:grid-cols-2">
         <Reveal from="left" y={48}>
           <div className="overflow-hidden rounded-3xl border border-line">
-            <Placeholder label="Elena entrenando (demo)" ratio="1/1" tone="volt" />
+            <Photo src="/photos/strong.jpg" alt="Mujer estirando los brazos en un estudio de entrenamiento" tone="yellow" sizes="(min-width: 768px) 45vw, 100vw" className="aspect-square w-full" />
           </div>
         </Reveal>
         <div>

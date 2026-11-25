@@ -2,7 +2,8 @@
 
 import { motion } from "motion/react";
 import { ArrowRight, Flame, TrendingDown } from "lucide-react";
-import { Button, LogoBadge, Placeholder, RevealText } from "@elena/ui";
+import { Button, LogoBadge, RevealText } from "@elena/ui";
+import { Photo } from "./photo";
 import { stats } from "@/lib/data";
 import { CountUp } from "./count-up";
 
@@ -82,7 +83,7 @@ export function Hero() {
           className="relative mx-auto w-full max-w-md lg:max-w-none"
         >
           <div className="overflow-hidden rounded-3xl border border-line">
-            <Placeholder label="Foto de Elena (demo)" ratio="4/5" />
+            <Photo src="/photos/hero.jpg" alt="Mujer entrenando con mancuernas en un gimnasio luminoso" priority sizes="(min-width: 1024px) 45vw, 100vw" className="aspect-[4/5] w-full" imgClassName="object-[70%_40%]" />
           </div>
 
           <motion.div

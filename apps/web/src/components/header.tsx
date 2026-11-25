@@ -36,7 +36,7 @@ export function Header() {
           <Logo />
         </a>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Principal">
+        <nav className="hidden items-center gap-8 lg:flex" aria-label="Principal">
           {nav.map((l) => (
             <a key={l.href} href={l.href} className="text-sm font-medium text-mute transition-colors hover:text-volt">
               {l.label}
@@ -44,7 +44,7 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-3 lg:flex">
           <Button href={APP_URL} variant="ghost">
             Acceso clientes
           </Button>
@@ -52,7 +52,7 @@ export function Header() {
         </div>
 
         <button
-          className="grid size-11 place-items-center rounded-full border border-line md:hidden"
+          className="grid size-11 place-items-center rounded-full border border-line lg:hidden"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -69,7 +69,7 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.22 }}
-            className="fixed inset-x-0 top-16 bottom-0 flex flex-col gap-1 bg-ink px-5 pb-8 pt-6 md:hidden"
+            className="fixed inset-x-0 top-16 bottom-0 flex flex-col gap-1 bg-ink px-5 pb-8 pt-6 lg:hidden"
           >
             {nav.map((l, i) => (
               <motion.a

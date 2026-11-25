@@ -7,6 +7,7 @@ import { ArrowRight, ClipboardList, Dumbbell } from "lucide-react";
 import { LogoBadge } from "@elena/ui";
 import { useApp, type Role } from "@/lib/store";
 import { useMounted } from "@/lib/hooks";
+import { InstallApp } from "@/components/install-app";
 
 const WEB_URL = process.env.NEXT_PUBLIC_WEB_URL ?? "http://localhost:3000";
 
@@ -67,6 +68,8 @@ export default function Login() {
             </motion.button>
           ))}
         </div>
+
+        <InstallApp />
 
         <p className="mt-6 text-center text-xs text-mute">
           Demo: acceso sin contraseña y datos provisionales. ·{" "}
