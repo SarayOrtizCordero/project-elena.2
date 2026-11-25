@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@import "@elena/ui/theme.css";
+@source "../../../../packages/ui/src";
+
+html,
+body {
+  overscroll-behavior-y: none;
+}
+
+/* Evita el zoom de iOS al enfocar inputs y mejora el toque */
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+button {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.safe-bottom {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}

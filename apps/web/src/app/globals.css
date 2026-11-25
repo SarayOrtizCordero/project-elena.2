@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@import "@elena/ui/theme.css";
+@source "../../../../packages/ui/src";
+
+section[id] {
+  scroll-margin-top: 5rem;
+}
