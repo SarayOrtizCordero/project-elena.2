@@ -67,11 +67,12 @@ export function Contact() {
                   </label>
                   <div className="grid gap-4 sm:grid-cols-2">
                     <label className="block">
-                      <span className="mb-2 block text-sm text-mute">Modalidad</span>
+                      <span className="mb-2 block text-sm text-mute">Servicio</span>
                       <select name="mode" className={field} defaultValue="online">
-                        <option value="online">Online</option>
-                        <option value="presencial">Presencial</option>
-                        <option value="hibrido">Híbrido</option>
+                        <option value="online">Entreno online</option>
+                        <option value="presencial">Entreno personal</option>
+                        <option value="nutricion">Nutrición</option>
+                        <option value="combo">Combo completo (entreno + nutrición)</option>
                       </select>
                     </label>
                     <label className="block">

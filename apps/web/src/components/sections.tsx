@@ -1,4 +1,4 @@
-import { Check, Dumbbell, Smartphone, Star } from "lucide-react";
+import { Check, Dumbbell, Salad, Smartphone, Sparkles, Star } from "lucide-react";
 import { Reveal, RevealText } from "@elena/ui";
 import { gallery, marquee, services, steps, testimonials } from "@/lib/data";
 import { Photo } from "./photo";
@@ -39,21 +39,27 @@ export function Services() {
   return (
     <section id="servicios" className="relative isolate mx-auto max-w-6xl px-5 py-28">
       <Glow className="right-0 top-[35%]" />
-      <SectionTitle kicker="Servicios" title="Dos formas de *llegar a tu meta*" />
+      <SectionTitle kicker="Servicios" title="Cuatro formas de *llegar a tu meta*" />
       <div className="grid gap-5 md:grid-cols-2">
         {services.map((s, i) => (
           <Reveal key={s.id} delay={i * 0.12}>
             <article className="glass group h-full overflow-hidden rounded-3xl p-7 transition duration-300 hover:border-volt/50 sm:p-9">
-              <Photo src={s.photo} alt={s.alt} sizes="(min-width: 768px) 50vw, 100vw" className="-mx-7 -mt-7 mb-7 aspect-[16/9] sm:-mx-9 sm:-mt-9 sm:mb-8" />
+              {s.photo ? (
+                <Photo src={s.photo} alt={s.alt} sizes="(min-width: 768px) 50vw, 100vw" className="-mx-7 -mt-7 mb-7 aspect-[16/9] sm:-mx-9 sm:-mt-9 sm:mb-8" />
+              ) : (
+                <div aria-hidden className="-mx-7 -mt-7 mb-7 grid aspect-[16/9] place-items-center overflow-hidden bg-volt text-ink sm:-mx-9 sm:-mt-9 sm:mb-8">
+                  <Salad className="size-32" strokeWidth={1.25} />
+                </div>
+              )}
               <div className="mb-8 flex items-center justify-between">
                 <span className="grid size-14 place-items-center rounded-2xl bg-volt text-ink">
-                  {s.id === "online" ? <Smartphone className="size-7" /> : <Dumbbell className="size-7" />}
+                  {s.id === "online" ? <Smartphone className="size-7" /> : s.id === "nutricion" ? <Salad className="size-7" /> : s.id === "combo" ? <Sparkles className="size-7" /> : <Dumbbell className="size-7" />}
                 </span>
                 <span className="rounded-full border border-line px-3 py-1 text-xs uppercase tracking-widest text-mute">
                   {s.tag}
                 </span>
               </div>
-              <h3 className="font-display-tight text-5xl font-bold">{s.title}</h3>
+              <h3 className="font-display-tight text-4xl font-bold sm:text-5xl">{s.title}</h3>
               <p className="mt-4 text-mute">{s.blurb}</p>
               <ul className="mt-6 space-y-3">
                 {s.points.map((p, k) => (

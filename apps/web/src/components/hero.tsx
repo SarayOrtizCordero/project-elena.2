@@ -37,7 +37,7 @@ export function Hero() {
             variants={item}
             className="mb-5 inline-flex items-center gap-2 rounded-full border border-line bg-ink-2 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-volt"
           >
-            <span className="size-2 rounded-full bg-volt" /> Presencial · Online
+            <span className="size-2 rounded-full bg-volt" /> Entreno · Nutrición
           </motion.p>
 
           <RevealText

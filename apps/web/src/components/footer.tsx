@@ -18,7 +18,7 @@ export function Footer() {
         <div>
           <LogoBadge className="mb-4 size-28" />
           <Logo />
-          <p className="mt-3 max-w-xs text-sm text-mute">Entrenamiento personal presencial y online.</p>
+          <p className="mt-3 max-w-xs text-sm text-mute">Entreno personal, online y nutrición.</p>
         </div>
         <nav aria-label="Pie" className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-mute">
           {nav.map((l) => (
