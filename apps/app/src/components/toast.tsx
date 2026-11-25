@@ -29,7 +29,7 @@ export function Toaster() {
             initial={{ opacity: 0, y: 16, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8 }}
-            className="rounded-full border border-line bg-ink-3 px-5 py-3 text-sm font-medium shadow-2xl"
+            className="glass-strong rounded-full px-5 py-3 text-sm font-medium shadow-2xl"
           >
             {msg}
           </motion.div>

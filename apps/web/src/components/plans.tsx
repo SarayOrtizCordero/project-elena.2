@@ -67,7 +67,7 @@ export function Plans() {
             transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
             className={cn(
               "relative flex flex-col rounded-3xl border p-7 transition-colors duration-300",
-              p.featured ? "border-volt bg-volt text-ink" : "border-line bg-ink-2 hover:border-volt/50",
+              p.featured ? "border-volt bg-volt text-ink" : "glass hover:border-volt/50",
             )}
           >
             {p.badge && (

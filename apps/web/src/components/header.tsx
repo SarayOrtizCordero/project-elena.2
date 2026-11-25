@@ -28,7 +28,7 @@ export function Header() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-        scrolled || open ? "bg-ink/85 backdrop-blur-lg border-b border-line" : "bg-transparent",
+        "glass-nav border-b border-white/10",
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
@@ -69,7 +69,7 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.22 }}
-            className="fixed inset-x-0 top-16 bottom-0 flex flex-col gap-1 bg-ink px-5 pb-8 pt-6 lg:hidden"
+            className="fixed inset-x-0 top-16 bottom-0 flex flex-col gap-1 bg-black px-5 pb-8 pt-6 lg:hidden"
           >
             {nav.map((l, i) => (
               <motion.a

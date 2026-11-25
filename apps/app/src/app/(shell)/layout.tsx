@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion } from "motion/react";
-import { ClipboardList, Dumbbell, House, LayoutDashboard, LogOut, TrendingUp, Utensils } from "lucide-react";
+import { CirclePlay, ClipboardList, Dumbbell, House, LayoutDashboard, LogOut, TrendingUp, Utensils } from "lucide-react";
 import { Logo, cn } from "@elena/ui";
 import { useApp } from "@/lib/store";
 import { useMounted } from "@/lib/hooks";
@@ -14,6 +14,7 @@ const clientNav = [
   { href: "/hoy", label: "Hoy", icon: House },
   { href: "/entreno", label: "Entreno", icon: Dumbbell },
   { href: "/comidas", label: "Comidas", icon: Utensils },
+  { href: "/videos", label: "Vídeos", icon: CirclePlay },
   { href: "/progreso", label: "Progreso", icon: TrendingUp },
 ];
 const coachNav = [
@@ -104,7 +105,7 @@ export default function ShellLayout({ children }: { children: React.ReactNode })
       </aside>
 
       {/* Cabecera móvil */}
-      <header className="safe-top sticky top-0 z-30 border-b border-line bg-ink/85 backdrop-blur-lg lg:hidden">
+      <header className="safe-top sticky top-0 z-30 glass-nav border-b border-white/10 lg:hidden">
         <div className="flex h-14 items-center justify-between px-4">
           <Logo className="text-xl" />
           <button
@@ -125,7 +126,7 @@ export default function ShellLayout({ children }: { children: React.ReactNode })
       {/* Tab bar móvil */}
       <nav
         aria-label="Principal"
-        className="safe-bottom fixed inset-x-0 bottom-0 z-40 border-t border-line bg-ink/90 backdrop-blur-lg lg:hidden"
+        className="safe-bottom fixed inset-x-0 bottom-0 z-40 glass-nav border-t border-white/10 lg:hidden"
       >
         <ul className="mx-auto grid max-w-md" style={{ gridTemplateColumns: `repeat(${nav.length}, 1fr)` }}>
           {nav.map((n) => {

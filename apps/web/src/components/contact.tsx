@@ -42,7 +42,7 @@ export function Contact() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="rounded-3xl border border-line bg-ink-2 p-6 sm:p-8">
+          <div className="glass-strong rounded-3xl p-6 sm:p-8">
             <AnimatePresence mode="wait">
               {sent ? (
                 <motion.div

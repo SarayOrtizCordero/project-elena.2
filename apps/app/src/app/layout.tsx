@@ -17,11 +17,24 @@ const sans = Inter({
   display: "swap",
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3001");
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Elena Fit · Tu progreso",
   description: "Entrenos, comidas y progreso en un solo lugar.",
   applicationName: "Elena Fit",
   appleWebApp: { capable: true, title: "Elena Fit", statusBarStyle: "black-translucent" },
+  openGraph: {
+    title: "Elena Fit · App (Demo 2)",
+    description: "Entrenos, comidas y progreso en un solo lugar.",
+    type: "website",
+    locale: "es_ES",
+    siteName: "Elena Fit",
+  },
+  twitter: { card: "summary_large_image", title: "Elena Fit · App (Demo 2)", description: "Entrenos, comidas y progreso en un solo lugar." },
   robots: { index: false, follow: false },
 };
 

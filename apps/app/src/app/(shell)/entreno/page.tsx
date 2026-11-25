@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { Check, Timer, X } from "lucide-react";
+import { Check, Play, Timer, X } from "lucide-react";
 import { cn } from "@elena/ui";
 import { workouts, type Exercise } from "@/lib/data";
 import { todaysWorkout, useWorkoutProgress } from "@/lib/derive";
@@ -121,6 +122,9 @@ export default function Entreno() {
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-mute">{ex.muscle}</p>
                   <h2 className="text-lg font-semibold leading-snug">{ex.name}</h2>
+                  <Link href={`/videos?ex=${ex.id}`} className="mt-1 inline-flex min-h-8 items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-volt">
+                    <Play className="size-3.5 fill-current" aria-hidden /> Ver vídeo
+                  </Link>
                   <p className="mt-1 text-sm text-mute">
                     {ex.sets} × {ex.reps}
                     {ex.kg > 0 && <> · {ex.kg} kg</>} · descanso {ex.rest}s
@@ -165,7 +169,7 @@ export default function Entreno() {
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20 }}
-            className="fixed inset-x-4 bottom-24 z-50 mx-auto max-w-md overflow-hidden rounded-3xl border border-volt bg-ink-3 shadow-2xl lg:bottom-8 lg:left-auto lg:right-8"
+            className="fixed inset-x-4 bottom-24 z-50 mx-auto max-w-md overflow-hidden glass-strong rounded-3xl !border-volt shadow-2xl lg:bottom-8 lg:left-auto lg:right-8"
           >
             <div className="flex items-center gap-4 p-4">
               <span className="grid size-12 place-items-center rounded-2xl bg-volt text-ink">

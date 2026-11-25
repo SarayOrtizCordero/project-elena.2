@@ -100,7 +100,7 @@ export function AppSection() {
           <ul className="mt-8 grid gap-4 sm:grid-cols-2">
             {appPoints.map((p, i) => (
               <Reveal as="li" key={p.title} delay={0.1 + i * 0.08} y={18}>
-                <div className="h-full rounded-2xl border border-line bg-ink-2 p-5">
+                <div className="h-full glass rounded-2xl p-5">
                   <p className="flex items-center gap-2 font-semibold">
                     <Check className="size-4 shrink-0 text-volt" aria-hidden />
                     {p.title}
@@ -136,7 +136,7 @@ export function AppSection() {
         <ol className="mt-6 grid gap-4 md:grid-cols-3">
           {installSteps.map((s, i) => (
             <Reveal as="li" key={s.os} delay={i * 0.1} y={18}>
-              <div className="h-full rounded-2xl border border-line bg-ink-2 p-5">
+              <div className="h-full glass rounded-2xl p-5">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-volt">{s.os}</p>
                 <p className="mt-2">{s.how}</p>
               </div>

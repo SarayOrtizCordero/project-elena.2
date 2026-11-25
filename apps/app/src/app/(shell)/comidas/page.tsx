@@ -165,7 +165,7 @@ export default function Comidas() {
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
               transition={{ type: "spring", stiffness: 380, damping: 38 }}
-              className="relative flex max-h-[82dvh] w-full max-w-lg flex-col rounded-t-[2rem] border border-line bg-ink-2 lg:rounded-[2rem]"
+              className="relative flex max-h-[82dvh] w-full max-w-lg flex-col glass-strong rounded-t-[2rem] lg:rounded-[2rem]"
             >
               <div className="flex items-center gap-3 p-5 pb-3">
                 <div className="relative flex-1">

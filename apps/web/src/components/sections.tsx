@@ -18,6 +18,10 @@ export function Marquee() {
   );
 }
 
+function Glow({ className }: { className?: string }) {
+  return <div aria-hidden className={`pointer-events-none absolute -z-10 size-[26rem] rounded-full bg-volt/12 blur-[120px] ${className ?? ""}`} />;
+}
+
 function SectionTitle({ kicker, title }: { kicker: string; title: string }) {
   return (
     <div className="mb-14 max-w-2xl">
@@ -33,12 +37,13 @@ function SectionTitle({ kicker, title }: { kicker: string; title: string }) {
 
 export function Services() {
   return (
-    <section id="servicios" className="mx-auto max-w-6xl px-5 py-28">
+    <section id="servicios" className="relative isolate mx-auto max-w-6xl px-5 py-28">
+      <Glow className="right-0 top-[35%]" />
       <SectionTitle kicker="Servicios" title="Dos formas de *llegar a tu meta*" />
       <div className="grid gap-5 md:grid-cols-2">
         {services.map((s, i) => (
           <Reveal key={s.id} delay={i * 0.12}>
-            <article className="group h-full overflow-hidden rounded-3xl border border-line bg-ink-2 p-7 transition duration-300 hover:border-volt/50 sm:p-9">
+            <article className="glass group h-full overflow-hidden rounded-3xl p-7 transition duration-300 hover:border-volt/50 sm:p-9">
               <Photo src={s.photo} alt={s.alt} sizes="(min-width: 768px) 50vw, 100vw" className="-mx-7 -mt-7 mb-7 aspect-[16/9] sm:-mx-9 sm:-mt-9 sm:mb-8" />
               <div className="mb-8 flex items-center justify-between">
                 <span className="grid size-14 place-items-center rounded-2xl bg-volt text-ink">
@@ -68,13 +73,14 @@ export function Services() {
 
 export function Method() {
   return (
-    <section id="metodo" className="border-y border-line">
+    <section id="metodo" className="relative isolate border-y border-line">
+      <Glow className="left-[10%] top-[20%]" />
       <div className="mx-auto max-w-6xl px-5 py-28">
         <SectionTitle kicker="Método" title="Simple, claro y *a tu medida*" />
         <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((s, i) => (
             <Reveal as="li" key={s.n} delay={i * 0.1} className="list-none">
-              <div className="h-full rounded-3xl border border-line bg-ink-2 p-6 transition-colors hover:border-volt/50">
+              <div className="glass h-full rounded-3xl p-6 transition-colors hover:border-volt/50">
                 <span
                   className="font-display text-7xl text-transparent"
                   style={{ WebkitTextStroke: "1.5px var(--color-volt)" }}
@@ -109,7 +115,7 @@ export function Gallery() {
                   className="size-full"
                   imgClassName="transition-transform duration-700 group-hover:scale-105"
                 />
-                <figcaption className="absolute bottom-3 left-3 rounded-full bg-ink/85 px-3 py-1 text-xs font-bold uppercase tracking-widest backdrop-blur">
+                <figcaption className="absolute bottom-3 left-3 glass rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest">
                   {g.label}
                 </figcaption>
               </figure>
@@ -159,12 +165,13 @@ export function About() {
 
 export function Testimonials() {
   return (
-    <section className="mx-auto max-w-6xl px-5 py-28">
+    <section className="relative isolate mx-auto max-w-6xl px-5 py-28">
+      <Glow className="left-[5%] top-[30%]" />
       <SectionTitle kicker="Opiniones" title="Lo que dicen *mis clientas*" />
       <div className="grid gap-5 md:grid-cols-3">
         {testimonials.map((t, i) => (
           <Reveal key={t.name} delay={i * 0.12}>
-            <figure className="h-full rounded-3xl border border-line bg-ink-2 p-7">
+            <figure className="glass h-full rounded-3xl p-7">
               <div className="mb-4 flex gap-1 text-volt" aria-label="5 de 5 estrellas">
                 {Array.from({ length: 5 }).map((_, k) => (
                   <Star key={k} className="size-5 fill-current" />
