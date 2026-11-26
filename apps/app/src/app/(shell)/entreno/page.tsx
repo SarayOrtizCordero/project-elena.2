@@ -2,23 +2,28 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Timer, X } from "lucide-react";
 import { cn } from "@elena/ui";
 import { ExerciseCard } from "@/components/exercise-card";
 import { useToast } from "@/components/toast";
-import { workouts, type Exercise } from "@/lib/data";
+import type { Exercise } from "@/lib/data";
 import { todaysWorkout, useWorkoutProgress } from "@/lib/derive";
-import { countSets, dayKey, useApp } from "@/lib/store";
+import { countSets, dayKey, useApp, usePlan } from "@/lib/store";
 
 export default function Entreno() {
-  const [selected, setSelected] = useState(() => todaysWorkout().workout.id);
-  const workout = workouts.find((w) => w.id === selected) ?? workouts[0];
-  const prog = useWorkoutProgress(workout);
   const date = dayKey();
+  const routine = useApp((s) => s.routine);
+  const setRoutine = useApp((s) => s.setRoutine);
+  const { workouts, days } = usePlan();
+  const wanted = routine?.date === date ? routine.id : todaysWorkout({ workouts, days }).workout.id;
+  const workout = workouts.find((w) => w.id === wanted) ?? workouts[0];
+  const selected = workout.id;
+  const prog = useWorkoutProgress(workout);
   const logs = useApp((s) => s.logs);
   const toast = useToast((s) => s.show);
 
-  const [rest, setRest] = useState<{ name: string; left: number; total: number } | null>(null);
+  const resting = useApp((s) => s.rest !== null);
+  const startRest = useApp((s) => s.startRest);
+  const stopRest = useApp((s) => s.stopRest);
 
   // Se abre solo el primer ejercicio pendiente; si tocas otro, manda tu elección
   const [manual, setManual] = useState<string | null>(null);
@@ -35,23 +40,13 @@ export default function Entreno() {
     return () => clearTimeout(t);
   }, [pendingId]);
 
-  useEffect(() => {
-    if (!rest) return;
-    if (rest.left <= 0) {
-      setRest(null);
-      return;
-    }
-    const t = setTimeout(() => setRest((r) => (r ? { ...r, left: r.left - 1 } : r)), 1000);
-    return () => clearTimeout(t);
-  }, [rest]);
-
   function onLogged(ex: Exercise, remaining: number) {
     if (remaining > 0) {
       setManual(ex.id);
-      setRest({ name: ex.name, left: ex.rest, total: ex.rest });
+      startRest(ex.name, ex.rest);
     } else {
       setManual(null);
-      setRest(null);
+      stopRest();
       toast(`${ex.name}: completado`);
     }
   }
@@ -62,9 +57,9 @@ export default function Entreno() {
     <div className="space-y-5">
       <div>
         <h1 className="font-display-tight text-5xl font-extrabold sm:text-6xl">
-          Entre<span className="text-volt">no</span>
+          Entre<span className="text-highlight">no</span>
         </h1>
-        <p className="text-mute">{workout.focus}</p>
+        <p className="text-muted">{workout.focus}</p>
       </div>
 
       <div className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 lg:mx-0 lg:px-0" role="tablist" aria-label="Rutinas">
@@ -74,13 +69,13 @@ export default function Entreno() {
             role="tab"
             aria-selected={w.id === selected}
             onClick={() => {
-              setSelected(w.id);
+              setRoutine(w.id);
               setManual(null);
               previousPending.current = w.exercises.find((e) => countSets(logs[`${date}:${e.id}`]) < e.sets)?.id;
             }}
             className={cn(
               "h-11 shrink-0 rounded-full border px-5 font-display text-lg uppercase tracking-wide transition-colors",
-              w.id === selected ? "border-volt bg-volt text-ink" : "border-line text-mute hover:text-bone",
+              w.id === selected ? "border-brand bg-brand text-on-brand" : "border-line text-muted hover:text-fg",
             )}
           >
             {w.title}
@@ -88,17 +83,17 @@ export default function Entreno() {
         ))}
       </div>
 
-      <div className="rounded-3xl border border-line bg-ink-2 p-5">
+      <div className="rounded-3xl border border-line bg-surface p-5">
         <div className="mb-2 flex items-end justify-between">
           <p className="font-display text-3xl leading-none">
             {prog.done}
-            <span className="text-mute"> / {prog.total}</span> <span className="text-base text-mute">series</span>
+            <span className="text-muted"> / {prog.total}</span> <span className="text-base text-muted">series</span>
           </p>
-          <p className="text-sm text-mute">{workout.minutes} min</p>
+          <p className="text-sm text-muted">{workout.minutes} min</p>
         </div>
-        <div className="h-2.5 overflow-hidden rounded-full bg-ink-3">
+        <div className="h-2.5 overflow-hidden rounded-full bg-raised">
           <motion.div
-            className="h-full rounded-full bg-volt"
+            className="h-full rounded-full bg-highlight"
             animate={{ width: `${prog.pct * 100}%` }}
             transition={{ type: "spring", stiffness: 140, damping: 22 }}
           />
@@ -113,15 +108,15 @@ export default function Entreno() {
             exit={{ opacity: 0, height: 0 }}
             className="overflow-hidden"
           >
-            <div className="rounded-3xl bg-volt p-5 text-ink">
+            <div className="rounded-3xl bg-accent p-5 text-on-accent">
               <p className="font-display-tight text-3xl font-bold">¡Entreno completado!</p>
-              <p className="text-sm text-ink/80">Gran trabajo. Descansa, come bien y registra tu peso esta semana.</p>
+              <p className="text-sm text-on-accent/80">Gran trabajo. Descansa, come bien y registra tu peso esta semana.</p>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <ul className={cn("space-y-3", rest && "pb-48 lg:pb-32")}>
+      <ul className={cn("space-y-3", resting && "pb-48 lg:pb-32")}>
         {workout.exercises.map((ex, i) => (
           <ExerciseCard
             key={ex.id}
@@ -133,43 +128,6 @@ export default function Entreno() {
           />
         ))}
       </ul>
-
-      {/* Temporizador de descanso */}
-      <AnimatePresence>
-        {rest && (
-          <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20 }}
-            className="fixed inset-x-4 bottom-24 z-50 mx-auto max-w-md overflow-hidden glass-strong rounded-3xl !border-volt shadow-2xl lg:bottom-8 lg:left-auto lg:right-8"
-          >
-            <div className="flex items-center gap-4 p-4">
-              <span className="grid size-12 place-items-center rounded-2xl bg-volt text-ink">
-                <Timer className="size-6" />
-              </span>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-xs text-mute">Descanso · {rest.name}</p>
-                <p className="font-display text-4xl leading-none tabular-nums">
-                  {Math.floor(rest.left / 60)}:{String(rest.left % 60).padStart(2, "0")}
-                </p>
-              </div>
-              <button
-                onClick={() => setRest(null)}
-                aria-label="Saltar descanso"
-                className="grid size-10 place-items-center rounded-full border border-line text-mute hover:text-bone"
-              >
-                <X className="size-5" />
-              </button>
-            </div>
-            <div className="h-1 bg-ink">
-              <div
-                className="h-full bg-volt transition-[width] duration-1000 ease-linear"
-                style={{ width: `${(rest.left / rest.total) * 100}%` }}
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

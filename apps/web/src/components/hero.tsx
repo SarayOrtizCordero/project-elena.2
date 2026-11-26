@@ -29,15 +29,15 @@ export function Hero() {
     <section id="top" className="relative overflow-hidden pt-28 pb-16 sm:pt-32 lg:pb-24">
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-40 -right-40 size-[38rem] rounded-full bg-volt/10 blur-[140px]"
+        className="pointer-events-none absolute -top-40 -right-40 size-[38rem] rounded-full bg-highlight/10 blur-[140px]"
       />
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 lg:grid-cols-[1.1fr_0.9fr]">
         <motion.div variants={container} initial="hidden" animate="show">
           <motion.p
             variants={item}
-            className="mb-5 inline-flex items-center gap-2 rounded-full border border-line bg-ink-2 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-volt"
+            className="mb-5 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-highlight"
           >
-            <span className="size-2 rounded-full bg-volt" /> Entreno · Nutrición
+            <span className="size-2 rounded-full bg-highlight" /> Entreno · Nutrición
           </motion.p>
 
           <RevealText
@@ -48,7 +48,7 @@ export function Hero() {
             className="font-display-tight text-[clamp(3.5rem,13vw,8.5rem)] font-extrabold"
           />
 
-          <motion.p variants={item} className="mt-6 max-w-xl text-lg text-mute sm:text-xl">
+          <motion.p variants={item} className="mt-6 max-w-xl text-lg text-muted sm:text-xl">
             Rutina, nutrición y seguimiento real, diseñados para ti por Elena. En el gym o desde tu casa, con una app
             que te lo pone fácil.
           </motion.p>
@@ -66,10 +66,10 @@ export function Hero() {
             {stats.map((s) => (
               <div key={s.label}>
                 <dt className="sr-only">{s.label}</dt>
-                <dd className="font-display text-4xl text-volt sm:text-5xl">
+                <dd className="font-display text-4xl text-highlight sm:text-5xl">
                   <CountUp to={s.value} suffix={s.suffix} />
                 </dd>
-                <p className="mt-1 text-xs text-mute sm:text-sm">{s.label}</p>
+                <p className="mt-1 text-xs text-muted sm:text-sm">{s.label}</p>
               </div>
             ))}
           </motion.dl>
@@ -88,37 +88,37 @@ export function Hero() {
 
           <motion.div
             {...pop(0.9)}
-            className="absolute -right-2 -top-6 rounded-full bg-ink/90 p-1.5 shadow-xl backdrop-blur sm:-right-6 sm:-top-8"
+            className="absolute -right-2 -top-6 rounded-full bg-canvas/90 p-1.5 shadow-xl backdrop-blur sm:-right-6 sm:-top-8"
           >
             <LogoBadge className="size-24 sm:size-28" />
           </motion.div>
 
           <motion.div
             {...pop(0.6)}
-            className="absolute -left-3 top-10 rounded-2xl border border-line bg-ink/90 p-3.5 shadow-xl backdrop-blur sm:-left-8"
+            className="absolute -left-3 top-10 rounded-2xl border border-line bg-canvas/90 p-3.5 shadow-xl backdrop-blur sm:-left-8"
           >
             <div className="flex items-center gap-3">
-              <span className="grid size-10 place-items-center rounded-xl bg-volt text-ink">
+              <span className="grid size-10 place-items-center rounded-xl bg-accent text-on-accent">
                 <TrendingDown className="size-5" />
               </span>
               <div>
                 <p className="font-display text-2xl leading-none">-6,4 kg</p>
-                <p className="text-xs text-mute">en 8 semanas</p>
+                <p className="text-xs text-muted">en 8 semanas</p>
               </div>
             </div>
           </motion.div>
 
           <motion.div
             {...pop(0.75)}
-            className="absolute -right-2 bottom-12 rounded-2xl border border-line bg-ink/90 p-3.5 shadow-xl backdrop-blur sm:-right-6"
+            className="absolute -right-2 bottom-12 rounded-2xl border border-line bg-canvas/90 p-3.5 shadow-xl backdrop-blur sm:-right-6"
           >
             <div className="flex items-center gap-3">
-              <span className="grid size-10 place-items-center rounded-xl bg-ink-3 text-volt">
+              <span className="grid size-10 place-items-center rounded-xl bg-raised text-highlight">
                 <Flame className="size-5" />
               </span>
               <div>
                 <p className="font-display text-2xl leading-none">21 días</p>
-                <p className="text-xs text-mute">racha entrenando</p>
+                <p className="text-xs text-muted">racha entrenando</p>
               </div>
             </div>
           </motion.div>

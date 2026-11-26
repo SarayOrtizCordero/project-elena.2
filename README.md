@@ -8,7 +8,7 @@ apps/
   web/   Landing (Next.js, Tailwind v4, Motion)        → http://localhost:3000
   app/   App PWA para clientes y coach (datos demo)     → http://localhost:3001
 packages/
-  ui/    Sistema de diseño compartido (tokens negro/amarillo, Button, Reveal, Placeholder, Logo)
+  ui/    Sistema de diseño compartido (temas de color, Button, Reveal, Placeholder, Logo)
 supabase/
   migrations/  Esquema + RLS para cuando se pase a producción
 ```
@@ -27,8 +27,15 @@ npm run typecheck
 ## Demo de la app
 
 La pantalla de entrada tiene dos accesos sin contraseña: **cliente** (Lucía) y **coach** (Elena).
-Todo lo que registres (series, comidas, peso) se guarda en `localStorage`. Es instalable como PWA
+Todo lo que registres (series, comidas, peso, citas, bonos, rutinas) se guarda en `localStorage`, y los
+vídeos subidos en IndexedDB: **solo en ese dispositivo**. Es instalable como PWA
 (en producción: `npm run build && npm run start`).
+
+Reglas de los bonos (`apps/app/src/lib/agenda.ts`): cada cita descuenta una sesión cuando llega su hora;
+la clienta solo puede cancelar con 24 h o más; Elena puede anular sin descontar o devolver una sesión.
+
+La web va en negro y amarillo (`packages/ui/src/theme.css`). La app usa cobalto y celeste con amarillo,
+elegido por Elena: sus colores se redefinen en `apps/app/src/app/globals.css`.
 
 ## Variables de entorno (opcionales)
 

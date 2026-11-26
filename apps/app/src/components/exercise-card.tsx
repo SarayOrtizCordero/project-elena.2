@@ -7,8 +7,8 @@ import { Check, ChevronDown, History, Pencil, Play, Sparkles } from "lucide-reac
 import { cn } from "@elena/ui";
 import type { Exercise } from "@/lib/data";
 import { shortDate } from "@/lib/hooks";
-import { isTimed, sessionsOf, setText, suggestion } from "@/lib/sessions";
-import { DEMO_CLIENT, countSets, dayKey, useApp, type SetList, type SetLog } from "@/lib/store";
+import { adjusted, isTimed, sessionsOf, setText, suggestion } from "@/lib/sessions";
+import { countSets, dayKey, useApp, type SetList, type SetLog } from "@/lib/store";
 import { Stepper, fmtNum } from "./stepper";
 import { useToast } from "./toast";
 
@@ -28,7 +28,6 @@ export function ExerciseCard({ ex, index, open, onToggle, onLogged }: Props) {
   const key = `${date}:${ex.id}`;
   const logs = useApp((s) => s.logs);
   const saveSet = useApp((s) => s.saveSet);
-  const startKg = useApp((s) => s.startKg[`${DEMO_CLIENT}:${ex.id}`]) ?? ex.kg;
   const toast = useToast((s) => s.show);
 
   const today = logs[key] ?? empty;
@@ -62,8 +61,8 @@ export function ExerciseCard({ ex, index, open, onToggle, onLogged }: Props) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.04 * index }}
       className={cn(
-        "scroll-mt-24 overflow-hidden rounded-3xl border bg-ink-2 transition-colors",
-        complete ? "border-volt/60" : open ? "border-bone/30" : "border-line",
+        "scroll-mt-24 overflow-hidden rounded-3xl border bg-surface transition-colors",
+        complete ? "border-highlight/60" : open ? "border-fg/30" : "border-line",
       )}
     >
       <h2>
@@ -77,24 +76,24 @@ export function ExerciseCard({ ex, index, open, onToggle, onLogged }: Props) {
           <span
             className={cn(
               "grid size-12 shrink-0 place-items-center rounded-2xl font-display text-2xl",
-              complete ? "bg-volt text-ink" : "bg-ink-3 text-volt",
+              complete ? "bg-accent text-on-accent" : "bg-raised text-highlight",
             )}
           >
             {complete ? <Check className="size-6" aria-label="Completado" /> : index + 1}
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block text-[11px] font-semibold uppercase tracking-[0.18em] text-mute">{ex.muscle}</span>
+            <span className="block text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">{ex.muscle}</span>
             <span className="block text-lg font-semibold leading-snug">{ex.name}</span>
             <span className="mt-2 flex items-center gap-1.5">
               {Array.from({ length: ex.sets }, (_, i) => (
-                <span key={i} aria-hidden className={cn("h-1.5 w-6 rounded-full", today[i] ? "bg-volt" : "bg-ink-3")} />
+                <span key={i} aria-hidden className={cn("h-1.5 w-6 rounded-full", today[i] ? "bg-highlight" : "bg-raised")} />
               ))}
-              <span className="ml-1 text-xs tabular-nums text-mute">
+              <span className="ml-1 text-xs tabular-nums text-muted">
                 {done}/{ex.sets}
               </span>
             </span>
           </span>
-          <ChevronDown className={cn("size-5 shrink-0 text-mute transition-transform", open && "rotate-180")} aria-hidden />
+          <ChevronDown className={cn("size-5 shrink-0 text-muted transition-transform", open && "rotate-180")} aria-hidden />
         </button>
       </h2>
 
@@ -110,29 +109,40 @@ export function ExerciseCard({ ex, index, open, onToggle, onLogged }: Props) {
           >
             <div className="space-y-4 border-t border-line p-4 sm:p-5">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="text-sm text-mute">
+                <p className="text-sm text-muted">
                   Objetivo: {ex.sets} × {ex.reps} · descanso {ex.rest} s
                 </p>
                 <Link
                   href={`/videos?ex=${ex.id}`}
-                  className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line px-4 text-xs font-bold uppercase tracking-wider text-volt hover:border-volt"
+                  className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line px-4 text-xs font-bold uppercase tracking-wider text-highlight hover:border-highlight"
                 >
                   <Play className="size-3.5 fill-current" aria-hidden /> Ver vídeo
                 </Link>
               </div>
 
+              {last && adjusted(ex, last) && (
+                <p className="flex items-start gap-3 rounded-2xl bg-alt px-4 py-3 text-sm text-on-alt">
+                  <Sparkles className="mt-0.5 size-4 shrink-0" aria-hidden />
+                  <span>
+                    <span className="font-semibold">Elena ha ajustado tu objetivo:</span>{" "}
+                    {ex.kg > 0 ? `${fmtNum(ex.kg)} kg · ` : ""}
+                    {ex.sets} × {ex.reps}
+                  </span>
+                </p>
+              )}
+
               {last ? (
-                <p className="rounded-2xl bg-ink-3 px-4 py-3 text-sm">
-                  <span className="font-semibold text-volt">Última vez</span> ({shortDate(last.date)}):{" "}
+                <p className="rounded-2xl bg-raised px-4 py-3 text-sm">
+                  <span className="font-semibold text-highlight">Última vez</span> ({shortDate(last.date)}):{" "}
                   {last.sets.map((s) => (s.kg > 0 ? `${fmtNum(s.kg)}×${s.reps}` : `${s.reps}`)).join(" · ")}
-                  {last.sets[0].kg > 0 ? <span className="text-mute"> (kg×reps)</span> : <span className="text-mute"> {isTimed(ex) ? "(segundos)" : "(reps)"}</span>}
+                  {last.sets[0].kg > 0 ? <span className="text-muted"> (kg×reps)</span> : <span className="text-muted"> {isTimed(ex) ? "(segundos)" : "(reps)"}</span>}
                 </p>
               ) : (
-                <p className="flex items-start gap-3 rounded-2xl bg-ink-3 px-4 py-3 text-sm">
-                  <Sparkles className="mt-0.5 size-4 shrink-0 text-volt" aria-hidden />
+                <p className="flex items-start gap-3 rounded-2xl bg-raised px-4 py-3 text-sm">
+                  <Sparkles className="mt-0.5 size-4 shrink-0 text-highlight" aria-hidden />
                   <span>
-                    <span className="font-semibold text-volt">Primera vez.</span>{" "}
-                    {startKg > 0 ? `Elena te propone empezar con ${fmtNum(startKg)} kg.` : "Empieza sin peso extra."} Después
+                    <span className="font-semibold text-highlight">Primera vez.</span>{" "}
+                    {ex.kg > 0 ? `Elena te propone empezar con ${fmtNum(ex.kg)} kg.` : "Empieza sin peso extra."} Después
                     apunta el que uses de verdad.
                   </span>
                 </p>
@@ -150,20 +160,20 @@ export function ExerciseCard({ ex, index, open, onToggle, onLogged }: Props) {
                         aria-current={on ? "step" : undefined}
                         className={cn(
                           "flex min-h-12 w-full items-center gap-3 rounded-2xl border px-4 text-left text-sm transition-colors",
-                          on ? "border-volt bg-volt/10" : "border-line hover:border-bone/40",
+                          on ? "border-highlight bg-highlight/10" : "border-line hover:border-fg/40",
                         )}
                       >
                         <span className="w-14 shrink-0 font-semibold">Serie {i + 1}</span>
-                        <span className={cn("flex-1 tabular-nums", !log && "text-mute")}>
+                        <span className={cn("flex-1 tabular-nums", !log && "text-muted")}>
                           {log ? setText(log, ex) : on ? "Ahora" : "Pendiente"}
                         </span>
                         {log && (
                           <>
-                            <Pencil className="size-4 text-mute" aria-label="Editar" />
+                            <Pencil className="size-4 text-muted" aria-label="Editar" />
                             <motion.span
                               initial={{ scale: 0 }}
                               animate={{ scale: 1 }}
-                              className="grid size-7 place-items-center rounded-full bg-volt text-ink"
+                              className="grid size-7 place-items-center rounded-full bg-accent text-on-accent"
                             >
                               <Check className="size-4" aria-label="Hecha" />
                             </motion.span>
@@ -173,11 +183,11 @@ export function ExerciseCard({ ex, index, open, onToggle, onLogged }: Props) {
                       {on && (
                         <SetEditor
                           id={`editor-${ex.id}`}
-                          key={`${i}-${log ? "edit" : "new"}-${startKg}`}
+                          key={`${i}-${log ? "edit" : "new"}-${ex.kg}-${ex.reps}`}
                           number={i + 1}
                           timed={isTimed(ex)}
                           editing={!!log}
-                          initial={log ?? suggestion(ex, i, today, last, startKg)}
+                          initial={log ?? suggestion(ex, i, today, last)}
                           onSave={(v) => save(i, v)}
                           onDelete={() => {
                             saveSet(key, i, null);
@@ -196,7 +206,7 @@ export function ExerciseCard({ ex, index, open, onToggle, onLogged }: Props) {
                     type="button"
                     onClick={() => setHistory((h) => !h)}
                     aria-expanded={history}
-                    className="inline-flex min-h-10 items-center gap-2 text-sm font-semibold text-mute hover:text-bone"
+                    className="inline-flex min-h-10 items-center gap-2 text-sm font-semibold text-muted hover:text-fg"
                   >
                     <History className="size-4" aria-hidden /> {history ? "Ocultar historial" : "Ver historial"}
                   </button>
@@ -205,7 +215,7 @@ export function ExerciseCard({ ex, index, open, onToggle, onLogged }: Props) {
                       {previous.slice(0, 4).map((s) => (
                         <li key={s.date} className="py-3 text-sm">
                           <p className="font-semibold">{shortDate(s.date)}</p>
-                          <p className="text-mute">{s.sets.map((x) => setText(x, ex)).join(" · ")}</p>
+                          <p className="text-muted">{s.sets.map((x) => setText(x, ex)).join(" · ")}</p>
                         </li>
                       ))}
                     </ul>
@@ -255,12 +265,12 @@ function SetEditor({
       </div>
       <button
         type="submit"
-        className="flex h-14 w-full items-center justify-center gap-2 rounded-full bg-volt font-display text-lg uppercase tracking-wide text-ink transition active:scale-[0.97]"
+        className="flex h-14 w-full items-center justify-center gap-2 rounded-full bg-accent font-display text-lg uppercase tracking-wide text-on-accent transition active:scale-[0.97]"
       >
         <Check className="size-5" aria-hidden /> {editing ? `Guardar cambios` : `Guardar serie ${number}`}
       </button>
       {editing && (
-        <button type="button" onClick={onDelete} className="mx-auto block min-h-10 px-4 text-sm font-semibold text-mute hover:text-bad">
+        <button type="button" onClick={onDelete} className="mx-auto block min-h-10 px-4 text-sm font-semibold text-muted hover:text-bad">
           Borrar serie {number}
         </button>
       )}

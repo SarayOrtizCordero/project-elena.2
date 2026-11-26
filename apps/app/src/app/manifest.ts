@@ -2,15 +2,15 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Elena Fit",
-    short_name: "Elena Fit",
+    name: "ElenitaFit",
+    short_name: "ElenitaFit",
     description: "Entrenos, comidas y progreso en un solo lugar.",
     start_url: "/",
     scope: "/",
     display: "standalone",
     orientation: "portrait",
-    background_color: "#000000",
-    theme_color: "#000000",
+    background_color: "#f3f7ff",
+    theme_color: "#f3f7ff",
     lang: "es",
     icons: [
       { src: "/icons/192", sizes: "192x192", type: "image/png", purpose: "any" },

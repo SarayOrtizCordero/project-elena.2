@@ -12,11 +12,11 @@ function Phone() {
       className="relative mx-auto aspect-[9/18.5] w-[15.5rem] rounded-[2.6rem] border-[7px] border-[#1c1c1e] bg-black p-3 shadow-[0_30px_80px_-20px_rgb(250_204_21/0.4)] sm:w-[17rem]"
     >
       <div className="absolute left-1/2 top-2.5 h-5 w-20 -translate-x-1/2 rounded-full bg-[#1c1c1e]" />
-      <div className="flex h-full flex-col gap-2.5 overflow-hidden rounded-[1.8rem] bg-ink px-3 pb-3 pt-9">
+      <div className="flex h-full flex-col gap-2.5 overflow-hidden rounded-[1.8rem] bg-canvas px-3 pb-3 pt-9">
         <p className="font-display text-2xl leading-none">
-          HOLA, <span className="text-volt">LUCÍA</span>
+          HOLA, <span className="text-highlight">LUCÍA</span>
         </p>
-        <div className="flex items-center gap-3 rounded-2xl border border-line bg-ink-2 p-3">
+        <div className="flex items-center gap-3 rounded-2xl border border-line bg-surface p-3">
           <svg viewBox="0 0 110 110" className="size-[4.6rem] shrink-0 -rotate-90">
             <circle cx="55" cy="55" r={r} fill="none" stroke="#1b1b1f" strokeWidth="11" />
             <circle
@@ -24,7 +24,7 @@ function Phone() {
               cy="55"
               r={r}
               fill="none"
-              stroke="#facc15"
+              stroke="var(--color-accent)"
               strokeWidth="11"
               strokeLinecap="round"
               strokeDasharray={c}
@@ -33,19 +33,19 @@ function Phone() {
           </svg>
           <div>
             <p className="font-display text-3xl leading-none">1.330</p>
-            <p className="text-[10px] uppercase tracking-widest text-mute">kcal hoy</p>
+            <p className="text-[10px] uppercase tracking-widest text-muted">kcal hoy</p>
           </div>
         </div>
-        <div className="rounded-2xl border border-line bg-ink-2 p-3">
-          <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-volt">Entreno de hoy</p>
+        <div className="rounded-2xl border border-line bg-surface p-3">
+          <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-highlight">Entreno de hoy</p>
           <p className="mt-1 font-display text-2xl leading-none">EMPUJE</p>
-          <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-ink-3">
-            <div className="h-full w-[62%] rounded-full bg-volt" />
+          <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-raised">
+            <div className="h-full w-[62%] rounded-full bg-highlight" />
           </div>
-          <p className="mt-1.5 text-[10px] text-mute">10 de 16 series</p>
+          <p className="mt-1.5 text-[10px] text-muted">10 de 16 series</p>
         </div>
-        <div className="rounded-2xl border border-line bg-ink-2 p-3">
-          <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-volt">Comidas</p>
+        <div className="rounded-2xl border border-line bg-surface p-3">
+          <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-highlight">Comidas</p>
           <ul className="mt-2 space-y-1.5 text-[10px]">
             {[
               ["Tostadas con aguacate", "320"],
@@ -54,16 +54,16 @@ function Phone() {
             ].map(([n, k]) => (
               <li key={n} className="flex items-center justify-between gap-2">
                 <span className="flex items-center gap-1.5">
-                  <span className="size-2.5 rounded-full bg-volt" />
+                  <span className="size-2.5 rounded-full bg-highlight" />
                   {n}
                 </span>
-                <span className="text-mute">{k}</span>
+                <span className="text-muted">{k}</span>
               </li>
             ))}
           </ul>
         </div>
-        <div className="mt-auto grid grid-cols-4 gap-1 border-t border-line pt-2 text-center text-[8px] font-semibold text-mute">
-          <span className="text-volt">Hoy</span>
+        <div className="mt-auto grid grid-cols-4 gap-1 border-t border-line pt-2 text-center text-[8px] font-semibold text-muted">
+          <span className="text-highlight">Hoy</span>
           <span>Entreno</span>
           <span>Comidas</span>
           <span>Progreso</span>
@@ -76,13 +76,13 @@ function Phone() {
 export function AppSection() {
   return (
     <section id="app" className="relative overflow-hidden border-t border-line">
-      <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 size-[34rem] -translate-y-1/2 translate-x-[5%] rounded-full bg-volt/15 blur-[120px] lg:translate-x-[20%]" />
+      <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 size-[34rem] -translate-y-1/2 translate-x-[5%] rounded-full bg-highlight/15 blur-[120px] lg:translate-x-[20%]" />
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-28 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
           <Reveal y={12}>
-            <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-volt">
-              <span className="h-px w-8 bg-volt" /> La app
+            <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-highlight">
+              <span className="h-px w-8 bg-highlight" /> La app
             </p>
           </Reveal>
           <RevealText
@@ -91,7 +91,7 @@ export function AppSection() {
             className="font-display-tight text-5xl font-extrabold sm:text-6xl lg:text-7xl"
           />
           <Reveal delay={0.15}>
-            <p className="mt-6 max-w-xl text-lg text-mute">
+            <p className="mt-6 max-w-xl text-lg text-muted">
               Entrenos, comidas y progreso en un solo lugar, para ti y para Elena. Funciona en el móvil como cualquier app y
               no hace falta pasar por las tiendas.
             </p>
@@ -102,10 +102,10 @@ export function AppSection() {
               <Reveal as="li" key={p.title} delay={0.1 + i * 0.08} y={18}>
                 <div className="h-full glass rounded-2xl p-5">
                   <p className="flex items-center gap-2 font-semibold">
-                    <Check className="size-4 shrink-0 text-volt" aria-hidden />
+                    <Check className="size-4 shrink-0 text-highlight" aria-hidden />
                     {p.title}
                   </p>
-                  <p className="mt-2 text-sm text-mute">{p.text}</p>
+                  <p className="mt-2 text-sm text-muted">{p.text}</p>
                 </div>
               </Reveal>
             ))}
@@ -120,7 +120,7 @@ export function AppSection() {
                 <Smartphone className="size-5" aria-hidden /> Abrir la demo
               </Button>
             </div>
-            <p className="mt-3 text-xs text-mute">App de demostración con datos de ejemplo.</p>
+            <p className="mt-3 text-xs text-muted">App de demostración con datos de ejemplo.</p>
           </Reveal>
         </div>
 
@@ -137,7 +137,7 @@ export function AppSection() {
           {installSteps.map((s, i) => (
             <Reveal as="li" key={s.os} delay={i * 0.1} y={18}>
               <div className="h-full glass rounded-2xl p-5">
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-volt">{s.os}</p>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-highlight">{s.os}</p>
                 <p className="mt-2">{s.how}</p>
               </div>
             </Reveal>

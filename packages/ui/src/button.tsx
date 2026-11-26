@@ -15,9 +15,9 @@ const base =
 
 const variants = {
   primary:
-    "bg-volt text-ink hover:bg-volt-2 hover:shadow-[0_0_0_6px_rgb(250_204_21/0.18)]",
-  dark: "bg-ink-3 text-bone border border-line hover:border-volt hover:text-volt",
-  ghost: "text-bone border border-line hover:border-bone",
+    "bg-accent text-on-accent hover:bg-accent-hover hover:shadow-[0_0_0_6px_color-mix(in_srgb,var(--color-accent)_22%,transparent)]",
+  dark: "bg-raised text-fg border border-line hover:border-highlight hover:text-highlight",
+  ghost: "text-fg border border-line hover:border-fg",
 } as const;
 
 const sizes = {

@@ -22,13 +22,13 @@ const siteUrl =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Elena Fit · Entrenamiento personal presencial y online",
+  title: "ElenitaFit · Entrenamiento personal presencial y online",
   description:
     "Entrenamiento personal y nutrición a tu medida, en persona o desde donde estés. Rutinas, plan de comidas y seguimiento real con Elena.",
-  twitter: { card: "summary_large_image", title: "Elena Fit · Web (Demo 2)", description: "Rutinas, nutrición y seguimiento real. Presencial u online." },
+  twitter: { card: "summary_large_image", title: "ElenitaFit · Web", description: "Rutinas, nutrición y seguimiento real. Presencial u online." },
   openGraph: {
-    siteName: "Elena Fit",
-    title: "Elena Fit · Web (Demo 2)",
+    siteName: "ElenitaFit",
+    title: "ElenitaFit · Web",
     description: "Rutinas, nutrición y seguimiento real. Presencial u online.",
     type: "website",
     locale: "es_ES",

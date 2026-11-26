@@ -2,12 +2,14 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-/** Icono PWA: marca de Elena (mancuerna-corazón) en amarillo sobre negro. */
+/** Icono PWA: marca de Elena (mancuerna-corazón) en amarillo sobre cobalto. */
 export function renderIcon(size: number) {
-  const png = readFileSync(join(process.cwd(), "public", "brand", "logo-mark-volt.png"));
+  // Ya viene teñida: el generador de imágenes recortaba la marca si se usaba como máscara
+  const png = readFileSync(join(process.cwd(), "public", "brand", "logo-mark-yellow.png"));
   const src = `data:image/png;base64,${png.toString("base64")}`;
-  const h = Math.round(size * 0.62);
-  const w = Math.round(h * (226 / 314));
+  // Cabe en la zona segura de los iconos "maskable" (círculo del 80 %)
+  const w = Math.round(size * 0.64);
+  const h = Math.round(w * (289 / 400));
   return new ImageResponse(
     (
       <div
@@ -17,7 +19,7 @@ export function renderIcon(size: number) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#000000",
+          background: "#1b3fc4",
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}

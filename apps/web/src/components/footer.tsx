@@ -18,15 +18,15 @@ export function Footer() {
         <div>
           <LogoBadge className="mb-4 size-28" />
           <Logo />
-          <p className="mt-3 max-w-xs text-sm text-mute">Entreno personal, online y nutrición.</p>
+          <p className="mt-3 max-w-xs text-sm text-muted">Entreno personal, online y nutrición.</p>
         </div>
-        <nav aria-label="Pie" className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-mute">
+        <nav aria-label="Pie" className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
           {nav.map((l) => (
-            <a key={l.href} href={l.href} className="hover:text-volt">
+            <a key={l.href} href={l.href} className="hover:text-highlight">
               {l.label}
             </a>
           ))}
-          <a href={APP_URL} className="hover:text-volt">
+          <a href={APP_URL} className="hover:text-highlight">
             Acceso clientes
           </a>
         </nav>
@@ -36,7 +36,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram de Elena"
-            className="grid size-11 place-items-center rounded-full border border-line transition-colors hover:border-volt hover:text-volt"
+            className="grid size-11 place-items-center rounded-full border border-line transition-colors hover:border-highlight hover:text-highlight"
           >
             <InstagramIcon />
           </a>
@@ -44,14 +44,14 @@ export function Footer() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-line px-5 py-2.5 text-sm transition-colors hover:border-volt hover:text-volt"
+            className="rounded-full border border-line px-5 py-2.5 text-sm transition-colors hover:border-highlight hover:text-highlight"
           >
             WhatsApp
           </a>
         </div>
       </Reveal>
-      <p className="border-t border-line py-5 text-center text-xs text-mute">
-        © {new Date().getFullYear()} Elena Fit · Web de demostración, contenido provisional.
+      <p className="border-t border-line py-5 text-center text-xs text-muted">
+        © {new Date().getFullYear()} ElenitaFit · Web de demostración, contenido provisional.
       </p>
     </footer>
   );

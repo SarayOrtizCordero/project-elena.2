@@ -1,9 +1,10 @@
 "use client";
 
 import { useMemo } from "react";
-import { workouts, type Workout } from "./data";
+import { targets as baseTargets, type Workout } from "./data";
 import { planForDate } from "./menu";
-import { countSets, dayKey, useApp } from "./store";
+import type { ClientPlan } from "./plan";
+import { DEMO_CLIENT, countSets, dayKey, useApp } from "./store";
 
 export function useTotals(date: string = dayKey()) {
   const eaten = useApp((s) => s.eaten);
@@ -41,8 +42,10 @@ export function useWorkoutProgress(workout: Workout, date: string = dayKey()) {
 }
 
 /** Rutina que toca hoy (o la primera si es día de descanso). */
-export function todaysWorkout() {
-  const idx = (new Date().getDay() + 6) % 7;
-  const id = ["push", "lower", null, "pull", "glute", null, null][idx];
-  return { workout: workouts.find((w) => w.id === id) ?? workouts[0], rest: id === null };
+export function todaysWorkout(plan: ClientPlan) {
+  const id = plan.days[(new Date().getDay() + 6) % 7];
+  return { workout: plan.workouts.find((w) => w.id === id) ?? plan.workouts[0], rest: !id };
 }
+
+/** Objetivos de comida de la clienta (los de la plantilla que le haya asignado Elena). */
+export const useTargets = (clientId: string = DEMO_CLIENT) => useApp((s) => s.targetsBy[clientId]) ?? baseTargets;

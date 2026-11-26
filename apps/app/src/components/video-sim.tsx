@@ -62,14 +62,14 @@ export function VideoSim({ name, muscle, photo, position, info }: Props) {
 
   return (
     <div>
-      <div className="overflow-hidden rounded-3xl border border-line bg-ink-2">
-        <div className="relative aspect-[4/5] bg-black min-[480px]:aspect-video">
+      <div className="overflow-hidden rounded-3xl border border-line bg-surface">
+        <div className="relative aspect-[4/5] bg-black text-white min-[480px]:aspect-video">
           <Image
             src={photo}
             alt=""
             fill
             sizes="(min-width: 1024px) 800px, 100vw"
-            className="object-cover grayscale contrast-110 transition-transform duration-100 ease-linear motion-reduce:!scale-100"
+            className="object-cover saturate-[1.15] transition-transform duration-100 ease-linear motion-reduce:!scale-100"
             style={{ objectPosition: position, transform: `scale(${zoom})` }}
           />
           <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-black/55" />
@@ -77,7 +77,7 @@ export function VideoSim({ name, muscle, photo, position, info }: Props) {
           <p className="absolute left-3 top-3 rounded-full bg-black/65 px-3 py-1 text-[11px] font-bold uppercase tracking-widest backdrop-blur">
             {muscle}
           </p>
-          <p className="absolute right-3 top-3 rounded-full bg-black/65 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-volt backdrop-blur">
+          <p className="absolute right-3 top-3 rounded-full bg-black/65 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-sun backdrop-blur">
             Vídeo simulado
           </p>
 
@@ -85,21 +85,21 @@ export function VideoSim({ name, muscle, photo, position, info }: Props) {
             <button
               onClick={toggle}
               aria-label={ended ? "Volver a ver" : `Reproducir ${name}`}
-              className="absolute left-1/2 top-1/2 grid size-20 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-volt text-ink shadow-[0_0_0_10px_rgb(0_0_0/0.35)] transition active:scale-90"
+              className="absolute left-1/2 top-1/2 grid size-20 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-accent text-on-accent shadow-[0_0_0_10px_rgb(0_0_0/0.35)] transition active:scale-90"
             >
               {ended ? <RotateCcw className="size-8" aria-hidden /> : <Play className="size-8 translate-x-0.5 fill-current" aria-hidden />}
             </button>
           )}
 
           {t > 0 && (
-            <p className="absolute bottom-16 right-3 rounded-full bg-volt px-3 py-1 font-display text-lg leading-none text-ink">
+            <p className="absolute bottom-16 right-3 rounded-full bg-accent px-3 py-1 font-display text-lg leading-none text-on-accent">
               Rep {reps}
             </p>
           )}
 
           <div className="absolute inset-x-3 bottom-14 sm:bottom-16" aria-live="polite">
             <p className="inline-block max-w-[85%] rounded-lg bg-black/70 px-3 py-2 text-sm font-medium backdrop-blur sm:text-base">
-              <span className="mr-2 text-volt">
+              <span className="mr-2 text-sun">
                 {step + 1}/{n}
               </span>
               {info.steps[step]}
@@ -123,15 +123,15 @@ export function VideoSim({ name, muscle, photo, position, info }: Props) {
               onChange={(e) => setT(Number(e.target.value))}
               aria-label="Progreso del vídeo"
               aria-valuetext={`${fmt(t)} de ${fmt(D)}`}
-              className="h-1.5 flex-1 cursor-pointer accent-volt"
+              className="h-1.5 flex-1 cursor-pointer accent-sun"
             />
-            <span className="w-[5.2rem] shrink-0 text-right text-xs tabular-nums text-bone/80">
+            <span className="w-[5.2rem] shrink-0 text-right text-xs tabular-nums text-white/80">
               {fmt(t)} / {fmt(D)}
             </span>
             <button
               onClick={() => setSpeed((s) => (s === 1 ? 2 : 1))}
               aria-label={`Velocidad ${speed}x, cambiar`}
-              className="h-8 shrink-0 rounded-full border border-white/20 px-2.5 text-xs font-bold tabular-nums hover:border-volt"
+              className="h-8 shrink-0 rounded-full border border-white/20 px-2.5 text-xs font-bold tabular-nums hover:border-highlight"
             >
               {speed}x
             </button>
@@ -147,10 +147,10 @@ export function VideoSim({ name, muscle, photo, position, info }: Props) {
               aria-current={i === step ? "step" : undefined}
               className={cn(
                 "h-full w-full rounded-2xl border p-3.5 text-left text-sm transition-colors",
-                i === step ? "border-volt bg-volt/10" : "border-line bg-ink-2 hover:border-bone/40",
+                i === step ? "border-highlight bg-highlight/10" : "border-line bg-surface hover:border-fg/40",
               )}
             >
-              <span className={cn("mb-1 block font-display text-xl leading-none", i === step ? "text-volt" : "text-mute")}>
+              <span className={cn("mb-1 block font-display text-xl leading-none", i === step ? "text-highlight" : "text-muted")}>
                 {String(i + 1).padStart(2, "0")}
               </span>
               {s}
@@ -159,10 +159,10 @@ export function VideoSim({ name, muscle, photo, position, info }: Props) {
         ))}
       </ol>
 
-      <p className="mt-4 flex items-start gap-3 rounded-2xl border border-line bg-ink-2 p-4 text-sm">
-        <AlertTriangle className="mt-0.5 size-5 shrink-0 text-volt" aria-hidden />
+      <p className="mt-4 flex items-start gap-3 rounded-2xl border border-line bg-surface p-4 text-sm">
+        <AlertTriangle className="mt-0.5 size-5 shrink-0 text-highlight" aria-hidden />
         <span>
-          <strong className="text-volt">Error común:</strong> {info.tip}
+          <strong className="text-highlight">Error común:</strong> {info.tip}
         </span>
       </p>
     </div>

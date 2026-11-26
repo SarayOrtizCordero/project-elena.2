@@ -118,7 +118,16 @@ export function planForDate(date: string, planStart: string) {
   return { week, day, meals: menuFor(week, day) };
 }
 
-export type ShoppingItem = { id: IngredientId; name: string; cat: Category; amount: string; days: number[] };
+/**
+ * Lunes real de la próxima vez que toca una semana del menú (la actual o una posterior).
+ * Sirve para que, cuando el menú se repite, la lista de la compra empiece sin marcar.
+ */
+export function weekMonday(week: number, currentWeek: number, today: Date = new Date()) {
+  const ahead = (week - currentWeek + WEEKS) % WEEKS;
+  return mondayKey(new Date(today.getFullYear(), today.getMonth(), today.getDate() + ahead * 7));
+}
+
+export type ShoppingItem ={ id: IngredientId; name: string; cat: Category; amount: string; days: number[] };
 
 function formatAmount(total: number, unit: Unit) {
   const n = (v: number) => v.toLocaleString("es-ES", { maximumFractionDigits: 2 });

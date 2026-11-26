@@ -59,7 +59,7 @@ export function RevealText({
   text,
   as = "h2",
   className,
-  accentClassName = "text-volt",
+  accentClassName = "text-highlight",
   delay = 0,
   stagger = 0.06,
 }: Props) {

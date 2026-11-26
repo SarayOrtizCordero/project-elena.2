@@ -39,17 +39,17 @@ export function InstallApp() {
           await evt.userChoice;
           setEvt(null);
         }}
-        className="mt-4 flex h-14 border border-line bg-ink-2 w-full items-center justify-center gap-2 rounded-full font-display text-lg uppercase tracking-wide transition active:scale-[0.98]"
+        className="mt-4 flex h-14 border border-line bg-surface w-full items-center justify-center gap-2 rounded-full font-display text-lg uppercase tracking-wide transition active:scale-[0.98]"
       >
-        <Download className="size-5 text-volt" aria-hidden /> Instalar app
+        <Download className="size-5 text-highlight" aria-hidden /> Instalar app
       </button>
     );
   }
 
   if (ios) {
     return (
-      <p className="mt-4 flex items-start border border-line bg-ink-2 gap-3 rounded-2xl p-4 text-sm text-bone/90">
-        <Share className="mt-0.5 size-5 shrink-0 text-volt" aria-hidden />
+      <p className="mt-4 flex items-start border border-line bg-surface gap-3 rounded-2xl p-4 text-sm text-fg/90">
+        <Share className="mt-0.5 size-5 shrink-0 text-highlight" aria-hidden />
         <span>
           Para instalarla: toca <strong>Compartir</strong> en Safari y elige <strong>«Añadir a pantalla de inicio»</strong>.
         </span>

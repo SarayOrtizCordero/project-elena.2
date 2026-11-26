@@ -30,14 +30,14 @@ export function Stepper({ label, value, onChange, step = 1, min = 0, max = 999, 
   };
 
   const btn =
-    "grid h-14 w-11 shrink-0 place-items-center text-volt transition active:scale-90 disabled:opacity-30 disabled:active:scale-100";
+    "grid h-14 w-11 shrink-0 place-items-center text-highlight transition active:scale-90 disabled:opacity-30 disabled:active:scale-100";
 
   return (
     <div className={cn("min-w-0", className)}>
-      <label htmlFor={id} className="mb-1.5 block text-center text-xs font-semibold uppercase tracking-widest text-mute">
+      <label htmlFor={id} className="mb-1.5 block text-center text-xs font-semibold uppercase tracking-widest text-muted">
         {label}
       </label>
-      <div className="flex items-center rounded-2xl border border-line bg-ink focus-within:border-volt">
+      <div className="flex items-center rounded-2xl border border-line bg-canvas focus-within:border-highlight">
         <button type="button" onClick={() => bump(-step)} disabled={value <= min} aria-label={`Bajar ${label}`} className={btn}>
           <Minus className="size-5" aria-hidden />
         </button>

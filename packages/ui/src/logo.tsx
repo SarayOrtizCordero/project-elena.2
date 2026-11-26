@@ -1,44 +1,31 @@
 import { cn } from "./cn";
 
-/** Logo de Elena. Los PNG viven en `public/brand/` de cada app (origen: packages/ui/assets). */
+/* Los PNG son siluetas: se usan como máscara para que el logo tome el color del tema.
+   Viven en `public/brand/` de cada app (origen: packages/ui/assets). */
+const mask = (file: string) => ({
+  WebkitMask: `url(/brand/${file}) center / contain no-repeat`,
+  mask: `url(/brand/${file}) center / contain no-repeat`,
+});
+
 export function Logo({ className }: { className?: string }) {
   return (
     <span className={cn("inline-flex items-center gap-2.5 font-display text-2xl uppercase leading-none", className)}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/brand/logo-mark-volt.png"
-        alt=""
-        width={226}
-        height={314}
-        className="h-[1.35em] w-auto"
-        decoding="async"
-      />
+      <span aria-hidden className="h-[1.15em] w-[1.6em] shrink-0 bg-highlight" style={mask("logo-mark.png")} />
       <span className="tracking-wide">
-        Elena<span className="text-volt">Fit</span>
+        Elenita<span className="text-highlight">Fit</span>
       </span>
     </span>
   );
 }
 
-/** Sello circular completo ("Mi misión · Tú éxito"). */
-export function LogoBadge({
-  className,
-  tone = "white",
-  spin = false,
-}: {
-  className?: string;
-  tone?: "white" | "ink";
-  spin?: boolean;
-}) {
+/** Sello circular completo ("Tú éxito · Mi misión"). Hereda el color del texto. */
+export function LogoBadge({ className }: { className?: string }) {
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={`/brand/logo-badge-${tone}.png`}
-      alt="Sello Elena Fit: Mi misión, tu éxito"
-      width={640}
-      height={640}
-      decoding="async"
-      className={cn(spin && "animate-[spin_28s_linear_infinite]", className)}
+    <span
+      role="img"
+      aria-label="Sello ElenitaFit: tú éxito, mi misión"
+      className={cn("inline-block aspect-square shrink-0 bg-current", className)}
+      style={mask("logo-badge.png")}
     />
   );
 }

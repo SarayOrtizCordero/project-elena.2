@@ -35,16 +35,16 @@ export default function Login() {
 
   return (
     <div className="relative grid min-h-dvh place-items-center overflow-hidden px-5 py-10">
-      <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 size-[36rem] -translate-x-1/2 rounded-full bg-volt/10 blur-[140px]" />
+      <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 size-[36rem] -translate-x-1/2 rounded-full bg-highlight/10 blur-[140px]" />
       <div className="relative w-full max-w-md">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           <LogoBadge className="size-28" />
           <h1 className="font-display-tight mt-10 text-6xl font-extrabold sm:text-7xl">
             Tu progreso,
             <br />
-            <span className="text-volt">a tu ritmo</span>
+            <span className="text-highlight">a tu ritmo</span>
           </h1>
-          <p className="mt-4 text-mute">Entrenos, comidas y evolución en un solo lugar.</p>
+          <p className="mt-4 text-muted">Entrenos, comidas y evolución en un solo lugar.</p>
         </motion.div>
 
         <div className="mt-8 space-y-3">
@@ -57,25 +57,25 @@ export default function Login() {
               transition={{ duration: 0.5, delay: 0.15 + i * 0.1 }}
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.98 }}
-              className="group flex w-full items-center gap-4 rounded-3xl border border-line bg-ink-2 p-5 text-left transition-colors hover:border-volt"
+              className="group flex w-full items-center gap-4 rounded-3xl border border-line bg-surface p-5 text-left transition-colors hover:border-highlight"
             >
-              <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-volt text-ink">
+              <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-brand text-on-brand">
                 <o.icon className="size-7" />
               </span>
               <span className="flex-1">
                 <span className="block font-display-tight text-3xl font-bold">{o.title}</span>
-                <span className="block text-sm text-mute">{o.text}</span>
+                <span className="block text-sm text-muted">{o.text}</span>
               </span>
-              <ArrowRight className="size-5 text-mute transition-transform group-hover:translate-x-1 group-hover:text-volt" />
+              <ArrowRight className="size-5 text-muted transition-transform group-hover:translate-x-1 group-hover:text-highlight" />
             </motion.button>
           ))}
         </div>
 
         <InstallApp />
 
-        <p className="mt-6 text-center text-xs text-mute">
+        <p className="mt-6 text-center text-xs text-muted">
           Demo: acceso sin contraseña y datos provisionales. ·{" "}
-          <a href={WEB_URL} className="underline underline-offset-2 hover:text-volt">
+          <a href={WEB_URL} className="underline underline-offset-2 hover:text-highlight">
             Volver a la web
           </a>
         </p>

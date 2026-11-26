@@ -9,6 +9,13 @@ export type VideoInfo = {
   tip: string;
 };
 
+/** Para ejercicios que Elena crea y aún no tienen vídeo. */
+export const fallbackInfo: VideoInfo = {
+  duration: 30,
+  steps: ["Colócate con una postura estable.", "Haz el recorrido completo, controlando la bajada.", "Exhala en el esfuerzo y mantén la técnica."],
+  tip: "Si pierdes la técnica, baja el peso.",
+};
+
 export const videoInfo: Record<string, VideoInfo> = {
   "push-1": {
     duration: 36,

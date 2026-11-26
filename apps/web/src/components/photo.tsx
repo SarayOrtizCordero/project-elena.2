@@ -15,7 +15,7 @@ type PhotoProps = {
 /** Foto de stock con tratamiento de marca (provisional: se sustituirá por fotos reales de Elena). */
 export function Photo({ src, alt, tone = "mono", sizes = "100vw", priority, className, imgClassName }: PhotoProps) {
   return (
-    <div className={cn("relative isolate overflow-hidden", tone === "yellow" ? "bg-volt" : "bg-ink-2", className)}>
+    <div className={cn("relative isolate overflow-hidden", tone === "yellow" ? "bg-accent" : "bg-surface", className)}>
       <Image
         src={src}
         alt={alt}

@@ -1,5 +1,15 @@
-/* Sistema de diseño Elena Fit — negro + amarillo volt.
-   Compartido por apps/web y apps/app. */
+/* Sistema de diseño ElenitaFit, compartido por apps/web y apps/app.
+   Los colores se nombran por su FUNCIÓN: así una paleta nueva solo cambia estas variables.
+   Aquí está el tema de la WEB (negro y amarillo). La app los redefine en su globals.css.
+
+   canvas     fondo de la página (≈60 %)  brand    color principal: bloques y selección (≈30 %)
+   accent     amarillo: acción y logro (≈10 %)  on-brand  texto encima de brand
+   surface    tarjetas                  on-accent  texto encima de accent
+   raised     elementos sobre tarjetas  highlight  texto, iconos y barras de color sobre el fondo
+   line       bordes                    alt        segundo bloque de color · on-alt su texto
+   fg / muted texto principal/secundario  ok / bad   bien / atención
+   pop-1..4   categorías (macros, tipos de cita…)
+   sun        amarillo fijo, solo para texto sobre fotos oscurecidas */
 
 @theme inline {
   --font-display: var(--nf-display), "Arial Narrow", Impact, sans-serif;
@@ -7,18 +17,27 @@
 }
 
 @theme {
-  /* Negro puro de fondo; las superficies se elevan con grises neutros muy sutiles. */
-  --color-ink: #000000;
-  --color-ink-2: #0b0b0c;
-  --color-ink-3: #161617;
+  --color-canvas: #000000;
+  --color-surface: #0b0b0c;
+  --color-raised: #161617;
   --color-line: #232326;
-  --color-bone: #f6f5ef;
-  --color-mute: #a1a1aa;
-  --color-volt: #facc15;
-  --color-volt-2: #fde047;
-  --color-volt-dim: #a16207;
+  --color-fg: #f6f5ef;
+  --color-muted: #a1a1aa;
+  --color-brand: #facc15;
+  --color-on-brand: #000000;
+  --color-accent: #facc15;
+  --color-accent-hover: #fde047;
+  --color-on-accent: #000000;
+  --color-highlight: #facc15;
+  --color-alt: #161617;
+  --color-on-alt: #f6f5ef;
   --color-ok: #4ade80;
   --color-bad: #f87171;
+  --color-pop-1: #fb923c;
+  --color-pop-2: #4ade80;
+  --color-pop-3: #38bdf8;
+  --color-pop-4: #f472b6;
+  --color-sun: #facc15;
 
   --radius-card: 1.5rem;
 
@@ -42,18 +61,27 @@
   }
   @keyframes pulse-ring {
     0% {
-      box-shadow: 0 0 0 0 rgb(250 204 21 / 0.45);
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-accent) 55%, transparent);
     }
     100% {
-      box-shadow: 0 0 0 18px rgb(250 204 21 / 0);
+      box-shadow: 0 0 0 18px transparent;
     }
   }
 }
 
+/* Cristal: valores de la web; la app los adapta a cada paleta. */
+:root {
+  --glass-bg: rgb(0 0 0 / 0.55);
+  --glass-strong-bg: rgb(0 0 0 / 0.78);
+  --glass-nav-bg: rgb(0 0 0 / 0.88);
+  --glass-solid-bg: #0b0b0c;
+  --glass-border: rgb(255 255 255 / 0.14);
+}
+
 @layer base {
   html {
-    background: var(--color-ink);
-    color: var(--color-bone);
+    background: var(--color-canvas);
+    color: var(--color-fg);
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
   }
@@ -64,11 +92,11 @@
     overflow-x: hidden;
   }
   ::selection {
-    background: var(--color-volt);
-    color: var(--color-ink);
+    background: var(--color-accent);
+    color: var(--color-on-accent);
   }
   :focus-visible {
-    outline: 2px solid var(--color-volt);
+    outline: 2px solid var(--color-highlight);
     outline-offset: 3px;
     border-radius: 6px;
   }
@@ -103,22 +131,22 @@
 
 /* Cristal: fondo translúcido + desenfoque. Siempre con contraste suficiente para el texto de encima. */
 @utility glass {
-  background-color: rgb(0 0 0 / 0.55);
-  border: 1px solid rgb(255 255 255 / 0.14);
+  background-color: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   -webkit-backdrop-filter: blur(18px) saturate(1.5);
   backdrop-filter: blur(18px) saturate(1.5);
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12);
 }
 @utility glass-strong {
-  background-color: rgb(0 0 0 / 0.78);
-  border: 1px solid rgb(255 255 255 / 0.16);
+  background-color: var(--glass-strong-bg);
+  border: 1px solid var(--glass-border);
   -webkit-backdrop-filter: blur(24px) saturate(1.6);
   backdrop-filter: blur(24px) saturate(1.6);
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.14);
 }
-/* Nav: cristal casi negro (más oscuro que glass-strong). */
+/* Barras de navegación: cristal casi opaco. */
 @utility glass-nav {
-  background-color: rgb(0 0 0 / 0.88);
+  background-color: var(--glass-nav-bg);
   -webkit-backdrop-filter: blur(22px) saturate(1.5);
   backdrop-filter: blur(22px) saturate(1.5);
   box-shadow: inset 0 -1px 0 rgb(255 255 255 / 0.08);
@@ -128,14 +156,14 @@
   .glass,
   .glass-strong,
   .glass-nav {
-    background-color: rgb(10 10 10 / 0.97);
+    background-color: var(--glass-solid-bg);
   }
 }
 @media (prefers-reduced-transparency: reduce) {
   .glass,
   .glass-strong,
   .glass-nav {
-    background-color: #0b0b0c;
+    background-color: var(--glass-solid-bg);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }

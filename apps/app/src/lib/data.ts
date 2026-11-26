@@ -6,8 +6,12 @@ export type Exercise = {
   muscle: string;
   sets: number;
   reps: string;
-  kg: number; // peso inicial propuesto (Elena puede cambiarlo por clienta)
+  kg: number; // peso objetivo que pone Elena
   rest: number; // segundos
+  /** Fecha del último ajuste de Elena: si es posterior a la última sesión, se propone el suyo */
+  setOn?: string;
+  /** Vídeo de Elena asignado a este ejercicio */
+  videoId?: string;
 };
 
 export type Workout = {
@@ -114,19 +118,10 @@ export type Client = {
 };
 
 export const clients: Client[] = [
-  { id: "lucia", name: "Lucía Martín", mode: "Online", goal: "Perder grasa", adherence: 92, lastDays: 0, trend: [71.2, 70.6, 70.1, 69.4, 68.9, 68.2, 67.8, 67.1], note: "Muy constante. Subir cargas en pierna." },
+  { id: "lucia", name: "Lucía Martín", mode: "Híbrido", goal: "Perder grasa", adherence: 92, lastDays: 0, trend: [71.2, 70.6, 70.1, 69.4, 68.9, 68.2, 67.8, 67.1], note: "Muy constante. Subir cargas en pierna." },
   { id: "marta", name: "Marta García", mode: "Presencial", goal: "Ganar músculo", adherence: 85, lastDays: 1, trend: [58.0, 58.3, 58.5, 58.9, 59.2, 59.4, 59.9, 60.3], note: "Buena progresión. Revisar proteína." },
   { id: "carla", name: "Carla Ruiz", mode: "Híbrido", goal: "Recomposición", adherence: 74, lastDays: 2, trend: [66.0, 65.8, 65.9, 65.4, 65.3, 65.0, 65.1, 64.7], note: "Baja en fines de semana." },
   { id: "sofia", name: "Sofía Navarro", mode: "Online", goal: "Perder grasa", adherence: 48, lastDays: 6, trend: [79.0, 78.9, 78.8, 78.9, 78.7, 78.8, 78.8, 78.7], note: "Sin registros esta semana. Escribirle." },
   { id: "paula", name: "Paula Ortega", mode: "Presencial", goal: "Salud y fuerza", adherence: 88, lastDays: 0, trend: [62.0, 62.1, 61.9, 61.8, 61.9, 61.7, 61.6, 61.6], note: "Ritmo excelente." },
   { id: "irene", name: "Irene Soto", mode: "Online", goal: "Ganar músculo", adherence: 61, lastDays: 4, trend: [54.0, 54.1, 54.2, 54.2, 54.4, 54.4, 54.5, 54.6], note: "Ajustar calorías al alza." },
-];
-
-export const templates = [
-  { id: "t1", kind: "Rutina", name: "Empuje / Tirón / Pierna · 4 días", uses: 14 },
-  { id: "t2", kind: "Rutina", name: "Full body para principiantes · 3 días", uses: 22 },
-  { id: "t3", kind: "Rutina", name: "Glúteo y pierna · 4 días", uses: 17 },
-  { id: "t4", kind: "Comidas", name: "Definición · 1.800 kcal", uses: 19 },
-  { id: "t5", kind: "Comidas", name: "Mantenimiento · 2.100 kcal", uses: 11 },
-  { id: "t6", kind: "Comidas", name: "Volumen limpio · 2.600 kcal", uses: 8 },
 ];

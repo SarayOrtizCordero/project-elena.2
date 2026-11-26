@@ -33,13 +33,13 @@ export function Header() {
         )}
       >
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-          <a href="#top" aria-label="Elena Fit, inicio" onClick={() => setOpen(false)}>
+          <a href="#top" aria-label="ElenitaFit, inicio" onClick={() => setOpen(false)}>
             <Logo />
           </a>
 
           <nav className="hidden items-center gap-8 lg:flex" aria-label="Principal">
             {nav.map((l) => (
-              <a key={l.href} href={l.href} className="text-sm font-medium text-mute transition-colors hover:text-volt">
+              <a key={l.href} href={l.href} className="text-sm font-medium text-muted transition-colors hover:text-highlight">
                 {l.label}
               </a>
             ))}
@@ -72,7 +72,7 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.22 }}
-            className="fixed inset-x-0 top-16 bottom-0 z-40 flex flex-col gap-1 overflow-y-auto bg-black px-5 pb-8 pt-6 lg:hidden"
+            className="fixed inset-x-0 top-16 bottom-0 z-40 flex flex-col gap-1 overflow-y-auto bg-canvas px-5 pb-8 pt-6 lg:hidden"
           >
             {nav.map((l, i) => (
               <motion.a

@@ -23,23 +23,23 @@ const siteUrl =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Elena Fit · Tu progreso",
+  title: "ElenitaFit · Tu progreso",
   description: "Entrenos, comidas y progreso en un solo lugar.",
-  applicationName: "Elena Fit",
-  appleWebApp: { capable: true, title: "Elena Fit", statusBarStyle: "black-translucent" },
+  applicationName: "ElenitaFit",
+  appleWebApp: { capable: true, title: "ElenitaFit", statusBarStyle: "default" },
   openGraph: {
-    title: "Elena Fit · App (Demo 2)",
+    title: "ElenitaFit · App",
     description: "Entrenos, comidas y progreso en un solo lugar.",
     type: "website",
     locale: "es_ES",
-    siteName: "Elena Fit",
+    siteName: "ElenitaFit",
   },
-  twitter: { card: "summary_large_image", title: "Elena Fit · App (Demo 2)", description: "Entrenos, comidas y progreso en un solo lugar." },
+  twitter: { card: "summary_large_image", title: "ElenitaFit · App", description: "Entrenos, comidas y progreso en un solo lugar." },
   robots: { index: false, follow: false },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#f3f7ff",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",

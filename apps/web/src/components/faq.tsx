@@ -13,8 +13,8 @@ export function Faq() {
     <section id="faq" className="border-t border-line">
       <div className="mx-auto grid max-w-6xl gap-12 px-5 py-24 lg:grid-cols-[0.8fr_1.2fr]">
         <Reveal>
-          <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-volt">
-            <span className="h-px w-8 bg-volt" /> Dudas
+          <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-highlight">
+            <span className="h-px w-8 bg-highlight" /> Dudas
           </p>
           <RevealText as="h2" text="Preguntas *frecuentes*" className="font-display-tight text-5xl font-extrabold sm:text-6xl" />
         </Reveal>
@@ -39,7 +39,7 @@ export function Faq() {
                     {f.q}
                     <motion.span
                       animate={{ rotate: isOpen ? 45 : 0 }}
-                      className="grid size-9 shrink-0 place-items-center rounded-full border border-line text-volt"
+                      className="grid size-9 shrink-0 place-items-center rounded-full border border-line text-highlight"
                     >
                       <Plus className="size-5" />
                     </motion.span>
@@ -53,7 +53,7 @@ export function Faq() {
                         transition={{ duration: 0.3, ease: "easeOut" }}
                         className="overflow-hidden"
                       >
-                        <p className="pb-5 pr-12 text-mute">{f.a}</p>
+                        <p className="pb-5 pr-12 text-muted">{f.a}</p>
                       </motion.div>
                     )}
                   </AnimatePresence>

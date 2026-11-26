@@ -6,11 +6,11 @@ import { Photo } from "./photo";
 export function Marquee() {
   const items = [...marquee, ...marquee];
   return (
-    <div aria-hidden className="overflow-hidden border-y border-line bg-volt py-3 text-ink">
+    <div aria-hidden className="overflow-hidden border-y border-line bg-accent py-3 text-on-accent">
       <div className="flex w-max animate-marquee gap-10 whitespace-nowrap">
         {[...items, ...items].map((w, i) => (
           <span key={i} className="flex items-center gap-10 font-display text-2xl uppercase tracking-wide sm:text-3xl">
-            {w} <span className="size-1.5 rounded-full bg-ink" />
+            {w} <span className="size-1.5 rounded-full bg-canvas" />
           </span>
         ))}
       </div>
@@ -19,15 +19,15 @@ export function Marquee() {
 }
 
 function Glow({ className }: { className?: string }) {
-  return <div aria-hidden className={`pointer-events-none absolute -z-10 size-[26rem] rounded-full bg-volt/12 blur-[120px] ${className ?? ""}`} />;
+  return <div aria-hidden className={`pointer-events-none absolute -z-10 size-[26rem] rounded-full bg-highlight/12 blur-[120px] ${className ?? ""}`} />;
 }
 
 function SectionTitle({ kicker, title }: { kicker: string; title: string }) {
   return (
     <div className="mb-14 max-w-2xl">
       <Reveal y={12}>
-        <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-volt">
-          <span className="h-px w-8 bg-volt" /> {kicker}
+        <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-highlight">
+          <span className="h-px w-8 bg-highlight" /> {kicker}
         </p>
       </Reveal>
       <RevealText as="h2" text={title} className="font-display-tight text-5xl font-extrabold sm:text-6xl lg:text-7xl" />
@@ -43,28 +43,28 @@ export function Services() {
       <div className="grid gap-5 md:grid-cols-2">
         {services.map((s, i) => (
           <Reveal key={s.id} delay={i * 0.12}>
-            <article className="glass group h-full overflow-hidden rounded-3xl p-7 transition duration-300 hover:border-volt/50 sm:p-9">
+            <article className="glass group h-full overflow-hidden rounded-3xl p-7 transition duration-300 hover:border-highlight/50 sm:p-9">
               {s.photo ? (
                 <Photo src={s.photo} alt={s.alt} sizes="(min-width: 768px) 50vw, 100vw" className="-mx-7 -mt-7 mb-7 aspect-[16/9] sm:-mx-9 sm:-mt-9 sm:mb-8" />
               ) : (
-                <div aria-hidden className="-mx-7 -mt-7 mb-7 grid aspect-[16/9] place-items-center overflow-hidden bg-volt text-ink sm:-mx-9 sm:-mt-9 sm:mb-8">
+                <div aria-hidden className="-mx-7 -mt-7 mb-7 grid aspect-[16/9] place-items-center overflow-hidden bg-accent text-on-accent sm:-mx-9 sm:-mt-9 sm:mb-8">
                   <Salad className="size-32" strokeWidth={1.25} />
                 </div>
               )}
               <div className="mb-8 flex items-center justify-between">
-                <span className="grid size-14 place-items-center rounded-2xl bg-volt text-ink">
+                <span className="grid size-14 place-items-center rounded-2xl bg-accent text-on-accent">
                   {s.id === "online" ? <Smartphone className="size-7" /> : s.id === "nutricion" ? <Salad className="size-7" /> : s.id === "combo" ? <Sparkles className="size-7" /> : <Dumbbell className="size-7" />}
                 </span>
-                <span className="rounded-full border border-line px-3 py-1 text-xs uppercase tracking-widest text-mute">
+                <span className="rounded-full border border-line px-3 py-1 text-xs uppercase tracking-widest text-muted">
                   {s.tag}
                 </span>
               </div>
               <h3 className="font-display-tight text-4xl font-bold sm:text-5xl">{s.title}</h3>
-              <p className="mt-4 text-mute">{s.blurb}</p>
+              <p className="mt-4 text-muted">{s.blurb}</p>
               <ul className="mt-6 space-y-3">
                 {s.points.map((p, k) => (
                   <Reveal as="li" key={p} delay={0.25 + k * 0.08} y={14} className="flex items-start gap-3">
-                    <Check className="mt-0.5 size-5 shrink-0 text-volt" />
+                    <Check className="mt-0.5 size-5 shrink-0 text-highlight" />
                     <span>{p}</span>
                   </Reveal>
                 ))}
@@ -86,15 +86,15 @@ export function Method() {
         <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((s, i) => (
             <Reveal as="li" key={s.n} delay={i * 0.1} className="list-none">
-              <div className="glass h-full rounded-3xl p-6 transition-colors hover:border-volt/50">
+              <div className="glass h-full rounded-3xl p-6 transition-colors hover:border-highlight/50">
                 <span
                   className="font-display text-7xl text-transparent"
-                  style={{ WebkitTextStroke: "1.5px var(--color-volt)" }}
+                  style={{ WebkitTextStroke: "1.5px var(--color-accent)" }}
                 >
                   {s.n}
                 </span>
                 <h3 className="mt-3 font-display-tight text-3xl font-bold">{s.title}</h3>
-                <p className="mt-3 text-sm text-mute">{s.text}</p>
+                <p className="mt-3 text-sm text-muted">{s.text}</p>
               </div>
             </Reveal>
           ))}
@@ -130,7 +130,7 @@ export function Gallery() {
         ))}
       </ul>
       <Reveal y={8}>
-        <p className="mt-4 text-xs text-mute">Fotografías de stock provisionales. Se sustituirán por imágenes reales de Elena.</p>
+        <p className="mt-4 text-xs text-muted">Fotografías de stock provisionales. Se sustituirán por imágenes reales de Elena.</p>
       </Reveal>
     </section>
   );
@@ -147,19 +147,19 @@ export function About() {
         </Reveal>
         <div>
           <Reveal y={12}>
-            <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-volt">
-              <span className="h-px w-8 bg-volt" /> Sobre Elena
+            <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-highlight">
+              <span className="h-px w-8 bg-highlight" /> Sobre Elena
             </p>
           </Reveal>
           <RevealText as="h2" text="Entrenadora, *no gurú*" className="font-display-tight text-5xl font-extrabold sm:text-6xl" />
           <Reveal delay={0.2}>
-            <p className="mt-6 text-lg text-mute">
+            <p className="mt-6 text-lg text-muted">
               Llevo años acompañando a personas que querían cambiar y no sabían por dónde empezar. Mi método es
               sencillo: un plan realista, datos para medir y ajustes constantes. Sin dietas milagro ni promesas vacías.
             </p>
           </Reveal>
           <Reveal delay={0.3}>
-            <p className="mt-4 text-mute">
+            <p className="mt-4 text-muted">
               Texto provisional de demostración. Aquí irá la historia real de Elena y sus certificaciones.
             </p>
           </Reveal>
@@ -178,19 +178,19 @@ export function Testimonials() {
         {testimonials.map((t, i) => (
           <Reveal key={t.name} delay={i * 0.12}>
             <figure className="glass h-full rounded-3xl p-7">
-              <div className="mb-4 flex gap-1 text-volt" aria-label="5 de 5 estrellas">
+              <div className="mb-4 flex gap-1 text-highlight" aria-label="5 de 5 estrellas">
                 {Array.from({ length: 5 }).map((_, k) => (
                   <Star key={k} className="size-5 fill-current" />
                 ))}
               </div>
               <blockquote className="text-lg">&ldquo;{t.text}&rdquo;</blockquote>
               <figcaption className="mt-6 flex items-center gap-3 text-sm">
-                <span className="grid size-10 place-items-center rounded-full bg-volt font-display text-lg text-ink">
+                <span className="grid size-10 place-items-center rounded-full bg-accent font-display text-lg text-on-accent">
                   {t.name[0]}
                 </span>
                 <span>
                   <strong>{t.name}</strong>
-                  <span className="block text-mute">{t.mode}</span>
+                  <span className="block text-muted">{t.mode}</span>
                 </span>
               </figcaption>
             </figure>
