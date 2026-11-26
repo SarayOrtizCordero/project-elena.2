@@ -32,10 +32,12 @@ Todo lo que registres (series, comidas, peso) se guarda en `localStorage`. Es in
 
 ## Variables de entorno (opcionales)
 
-| Variable | Dónde | Por defecto |
-|---|---|---|
-| `NEXT_PUBLIC_APP_URL` | web | `http://localhost:3001` |
-| `NEXT_PUBLIC_WEB_URL` | app | `http://localhost:3000` |
+| Variable | Dónde | En desarrollo | En producción |
+|---|---|---|---|
+| `NEXT_PUBLIC_APP_URL` | web | `http://localhost:3001` | `https://project-elena-2-app.vercel.app` |
+| `NEXT_PUBLIC_WEB_URL` | app | `http://localhost:3000` | `https://project-elena-2.vercel.app` |
+
+Si cambia el dominio o el alojamiento, define estas variables y vuelve a desplegar.
 
 ## Del demo a producción
 

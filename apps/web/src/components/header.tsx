@@ -25,42 +25,45 @@ export function Header() {
   }, [open]);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-        "glass-nav border-b border-white/10",
-      )}
-    >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-        <a href="#top" aria-label="Elena Fit, inicio" onClick={() => setOpen(false)}>
-          <Logo />
-        </a>
+    <>
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
+          "glass-nav border-b border-white/10",
+        )}
+      >
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+          <a href="#top" aria-label="Elena Fit, inicio" onClick={() => setOpen(false)}>
+            <Logo />
+          </a>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Principal">
-          {nav.map((l) => (
-            <a key={l.href} href={l.href} className="text-sm font-medium text-mute transition-colors hover:text-volt">
-              {l.label}
-            </a>
-          ))}
-        </nav>
+          <nav className="hidden items-center gap-8 lg:flex" aria-label="Principal">
+            {nav.map((l) => (
+              <a key={l.href} href={l.href} className="text-sm font-medium text-mute transition-colors hover:text-volt">
+                {l.label}
+              </a>
+            ))}
+          </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
-          <Button href={APP_URL} variant="ghost">
-            Acceso clientes
-          </Button>
-          <Button href="#contacto">Empieza ya</Button>
+          <div className="hidden items-center gap-3 lg:flex">
+            <Button href={APP_URL} variant="ghost">
+              Acceso clientes
+            </Button>
+            <Button href="#contacto">Empieza ya</Button>
+          </div>
+
+          <button
+            className="grid size-11 place-items-center rounded-full border border-line lg:hidden"
+            aria-label={open ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
         </div>
+      </header>
 
-        <button
-          className="grid size-11 place-items-center rounded-full border border-line lg:hidden"
-          aria-label={open ? "Cerrar menú" : "Abrir menú"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
-        </button>
-      </div>
-
+      {/* Fuera del header: su desenfoque (backdrop-filter) encerraría este panel `fixed` dentro de la barra. */}
       <AnimatePresence>
         {open && (
           <motion.nav
@@ -69,7 +72,7 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.22 }}
-            className="fixed inset-x-0 top-16 bottom-0 flex flex-col gap-1 bg-black px-5 pb-8 pt-6 lg:hidden"
+            className="fixed inset-x-0 top-16 bottom-0 z-40 flex flex-col gap-1 overflow-y-auto bg-black px-5 pb-8 pt-6 lg:hidden"
           >
             {nav.map((l, i) => (
               <motion.a
@@ -79,12 +82,12 @@ export function Header() {
                 initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.05 * i + 0.05 }}
-                className="border-b border-line py-4 font-display text-4xl uppercase"
+                className="shrink-0 border-b border-line py-4 font-display text-4xl uppercase"
               >
                 {l.label}
               </motion.a>
             ))}
-            <div className="mt-auto flex flex-col gap-3">
+            <div className="mt-auto flex shrink-0 flex-col gap-3 pt-6">
               <Button href="#contacto" size="lg" onClick={() => setOpen(false)}>
                 Empieza ya
               </Button>
@@ -95,6 +98,6 @@ export function Header() {
           </motion.nav>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }

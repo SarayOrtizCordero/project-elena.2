@@ -9,7 +9,9 @@ import { useApp, type Role } from "@/lib/store";
 import { useMounted } from "@/lib/hooks";
 import { InstallApp } from "@/components/install-app";
 
-const WEB_URL = process.env.NEXT_PUBLIC_WEB_URL ?? "http://localhost:3000";
+const WEB_URL =
+  process.env.NEXT_PUBLIC_WEB_URL ??
+  (process.env.NODE_ENV === "production" ? "https://project-elena-2.vercel.app" : "http://localhost:3000");
 
 export default function Login() {
   const mounted = useMounted();
