@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { ChevronLeft, ClipboardEdit, MessageCircle } from "lucide-react";
 import { cn } from "@elena/ui";
+import { ClientLoads } from "@/components/client-loads";
 import { LineChart } from "@/components/line-chart";
 import { useToast } from "@/components/toast";
 import { clients } from "@/lib/data";
@@ -67,6 +68,8 @@ export default function ClienteDetalle() {
         <h2 className="font-display-tight mb-3 text-3xl font-bold">Evolución del peso</h2>
         <LineChart data={data} />
       </section>
+
+      <ClientLoads clientId={c.id} firstName={c.name.split(" ")[0]} />
 
       <section className="rounded-3xl border border-line bg-ink-2 p-5" aria-label="Nota">
         <h2 className="font-display-tight mb-2 text-3xl font-bold">Nota de la semana</h2>

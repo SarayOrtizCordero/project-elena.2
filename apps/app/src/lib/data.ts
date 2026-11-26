@@ -6,7 +6,7 @@ export type Exercise = {
   muscle: string;
   sets: number;
   reps: string;
-  kg: number;
+  kg: number; // peso inicial propuesto (Elena puede cambiarlo por clienta)
   rest: number; // segundos
 };
 
@@ -84,51 +84,8 @@ export type MealItem = {
   c: number;
   f: number;
 };
-export type Meal = { id: string; name: string; time: string; items: MealItem[] };
 
-export const mealPlan: Meal[] = [
-  {
-    id: "desayuno",
-    name: "Desayuno",
-    time: "08:00",
-    items: [
-      { id: "b1", name: "Tostadas integrales con aguacate", qty: "2 rebanadas", kcal: 320, p: 10, c: 34, f: 16 },
-      { id: "b2", name: "Yogur griego con fruta", qty: "180 g", kcal: 190, p: 17, c: 18, f: 5 },
-    ],
-  },
-  {
-    id: "comida",
-    name: "Comida",
-    time: "14:00",
-    items: [
-      { id: "l1", name: "Pechuga de pollo a la plancha", qty: "180 g", kcal: 300, p: 56, c: 0, f: 7 },
-      { id: "l2", name: "Arroz integral", qty: "80 g (crudo)", kcal: 280, p: 6, c: 58, f: 2 },
-      { id: "l3", name: "Ensalada mixta con AOVE", qty: "1 plato", kcal: 140, p: 3, c: 8, f: 11 },
-    ],
-  },
-  {
-    id: "merienda",
-    name: "Merienda",
-    time: "17:30",
-    items: [
-      { id: "s1", name: "Manzana", qty: "1 ud", kcal: 95, p: 0, c: 25, f: 0 },
-      { id: "s2", name: "Almendras", qty: "25 g", kcal: 150, p: 5, c: 5, f: 13 },
-      { id: "s3", name: "Batido de proteína", qty: "1 scoop", kcal: 120, p: 24, c: 3, f: 2 },
-    ],
-  },
-  {
-    id: "cena",
-    name: "Cena",
-    time: "21:00",
-    items: [
-      { id: "d1", name: "Salmón al horno", qty: "150 g", kcal: 310, p: 31, c: 0, f: 20 },
-      { id: "d2", name: "Boniato asado", qty: "200 g", kcal: 180, p: 3, c: 41, f: 0 },
-      { id: "d3", name: "Brócoli al vapor", qty: "150 g", kcal: 50, p: 4, c: 10, f: 1 },
-    ],
-  },
-];
-
-export const targets = { kcal: 2150, p: 150, c: 210, f: 75 };
+export const targets = { kcal: 2000, p: 135, c: 210, f: 70 };
 
 export const foodDb: Omit<MealItem, "id">[] = [
   { name: "Plátano", qty: "1 ud", kcal: 105, p: 1, c: 27, f: 0 },

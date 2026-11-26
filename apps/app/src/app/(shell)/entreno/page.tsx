@@ -1,23 +1,39 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Check, Play, Timer, X } from "lucide-react";
+import { Timer, X } from "lucide-react";
 import { cn } from "@elena/ui";
+import { ExerciseCard } from "@/components/exercise-card";
+import { useToast } from "@/components/toast";
 import { workouts, type Exercise } from "@/lib/data";
 import { todaysWorkout, useWorkoutProgress } from "@/lib/derive";
-import { dayKey, useApp } from "@/lib/store";
+import { countSets, dayKey, useApp } from "@/lib/store";
 
 export default function Entreno() {
   const [selected, setSelected] = useState(() => todaysWorkout().workout.id);
   const workout = workouts.find((w) => w.id === selected) ?? workouts[0];
   const prog = useWorkoutProgress(workout);
   const date = dayKey();
-  const sets = useApp((s) => s.sets);
-  const setSets = useApp((s) => s.setSets);
+  const logs = useApp((s) => s.logs);
+  const toast = useToast((s) => s.show);
 
   const [rest, setRest] = useState<{ name: string; left: number; total: number } | null>(null);
+
+  // Se abre solo el primer ejercicio pendiente; si tocas otro, manda tu elección
+  const [manual, setManual] = useState<string | null>(null);
+  const pendingId = workout.exercises.find((e) => countSets(logs[`${date}:${e.id}`]) < e.sets)?.id;
+  const openId = manual === "" ? undefined : (manual ?? pendingId);
+
+  // Al pasar al siguiente ejercicio, lo trae a la vista
+  const previousPending = useRef(pendingId);
+  useEffect(() => {
+    if (previousPending.current === pendingId) return;
+    previousPending.current = pendingId;
+    if (!pendingId) return;
+    const t = setTimeout(() => document.getElementById(`ex-${pendingId}`)?.scrollIntoView({ behavior: "smooth", block: "start" }), 320);
+    return () => clearTimeout(t);
+  }, [pendingId]);
 
   useEffect(() => {
     if (!rest) return;
@@ -29,15 +45,14 @@ export default function Entreno() {
     return () => clearTimeout(t);
   }, [rest]);
 
-  function tapSet(ex: Exercise, n: number) {
-    const key = `${date}:${ex.id}`;
-    const done = sets[key] ?? 0;
-    if (n <= done) {
-      setSets(key, n - 1);
+  function onLogged(ex: Exercise, remaining: number) {
+    if (remaining > 0) {
+      setManual(ex.id);
+      setRest({ name: ex.name, left: ex.rest, total: ex.rest });
     } else {
-      setSets(key, n);
-      if (n < ex.sets) setRest({ name: ex.name, left: ex.rest, total: ex.rest });
-      else setRest(null);
+      setManual(null);
+      setRest(null);
+      toast(`${ex.name}: completado`);
     }
   }
 
@@ -58,7 +73,11 @@ export default function Entreno() {
             key={w.id}
             role="tab"
             aria-selected={w.id === selected}
-            onClick={() => setSelected(w.id)}
+            onClick={() => {
+              setSelected(w.id);
+              setManual(null);
+              previousPending.current = w.exercises.find((e) => countSets(logs[`${date}:${e.id}`]) < e.sets)?.id;
+            }}
             className={cn(
               "h-11 shrink-0 rounded-full border px-5 font-display text-lg uppercase tracking-wide transition-colors",
               w.id === selected ? "border-volt bg-volt text-ink" : "border-line text-mute hover:text-bone",
@@ -102,64 +121,17 @@ export default function Entreno() {
         )}
       </AnimatePresence>
 
-      <ul className="space-y-3">
-        {workout.exercises.map((ex, i) => {
-          const done = Math.min(ex.sets, sets[`${date}:${ex.id}`] ?? 0);
-          const complete = done === ex.sets;
-          return (
-            <motion.li
-              key={ex.id}
-              layout
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.04 * i }}
-              className={cn(
-                "rounded-3xl border bg-ink-2 p-5 transition-colors",
-                complete ? "border-volt/60" : "border-line",
-              )}
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-mute">{ex.muscle}</p>
-                  <h2 className="text-lg font-semibold leading-snug">{ex.name}</h2>
-                  <Link href={`/videos?ex=${ex.id}`} className="mt-1 inline-flex min-h-8 items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-volt">
-                    <Play className="size-3.5 fill-current" aria-hidden /> Ver vídeo
-                  </Link>
-                  <p className="mt-1 text-sm text-mute">
-                    {ex.sets} × {ex.reps}
-                    {ex.kg > 0 && <> · {ex.kg} kg</>} · descanso {ex.rest}s
-                  </p>
-                </div>
-                {complete && (
-                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-volt text-ink">
-                    <Check className="size-5" />
-                  </span>
-                )}
-              </div>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {Array.from({ length: ex.sets }).map((_, k) => {
-                  const n = k + 1;
-                  const on = n <= done;
-                  return (
-                    <motion.button
-                      key={n}
-                      whileTap={{ scale: 0.88 }}
-                      onClick={() => tapSet(ex, n)}
-                      aria-pressed={on}
-                      aria-label={`Serie ${n} de ${ex.name}`}
-                      className={cn(
-                        "grid size-12 place-items-center rounded-2xl border font-display text-xl transition-colors",
-                        on ? "border-volt bg-volt text-ink" : "border-line text-mute hover:border-bone",
-                      )}
-                    >
-                      {on ? <Check className="size-5" /> : n}
-                    </motion.button>
-                  );
-                })}
-              </div>
-            </motion.li>
-          );
-        })}
+      <ul className={cn("space-y-3", rest && "pb-48 lg:pb-32")}>
+        {workout.exercises.map((ex, i) => (
+          <ExerciseCard
+            key={ex.id}
+            ex={ex}
+            index={i}
+            open={openId === ex.id}
+            onToggle={() => setManual(openId === ex.id ? "" : ex.id)}
+            onLogged={onLogged}
+          />
+        ))}
       </ul>
 
       {/* Temporizador de descanso */}

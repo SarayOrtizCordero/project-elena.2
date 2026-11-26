@@ -1,17 +1,37 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { Check, Plus, Search, Trash2, X } from "lucide-react";
 import { cn } from "@elena/ui";
 import { Bar } from "@/components/ring";
-import { foodDb, mealPlan, targets } from "@/lib/data";
+import { ShoppingList } from "@/components/shopping-list";
+import { foodDb, targets } from "@/lib/data";
 import { useTotals } from "@/lib/derive";
+import { dayNames, planForDate } from "@/lib/menu";
 import { dayKey, useApp } from "@/lib/store";
 import { useToast } from "@/components/toast";
 
-export default function Comidas() {
+const views = [
+  { id: "hoy", label: "Menú de hoy" },
+  { id: "compra", label: "Lista de la compra" },
+] as const;
+
+export default function Page() {
+  return (
+    <Suspense>
+      <Comidas />
+    </Suspense>
+  );
+}
+
+function Comidas() {
+  const router = useRouter();
+  const view = useSearchParams().get("vista") === "compra" ? "compra" : "hoy";
   const date = dayKey();
+  const planStart = useApp((s) => s.planStart);
+  const plan = planForDate(date, planStart);
   const totals = useTotals();
   const eaten = useApp((s) => s.eaten);
   const extra = useApp((s) => s.extra[date]);
@@ -34,8 +54,32 @@ export default function Comidas() {
         <h1 className="font-display-tight text-5xl font-extrabold sm:text-6xl">
           Comi<span className="text-volt">das</span>
         </h1>
-        <p className="text-mute">Marca lo que comes y añade lo que no esté en tu plan.</p>
+        <p className="text-mute">
+          {view === "hoy" ? `Semana ${plan.week + 1} · ${dayNames[plan.day]}. Marca lo que comes.` : "Elige semana y día y marca lo que ya tienes."}
+        </p>
       </div>
+
+      <div className="grid grid-cols-2 rounded-full border border-line bg-ink-2 p-1" role="tablist" aria-label="Nutrición">
+        {views.map((v) => (
+          <button
+            key={v.id}
+            role="tab"
+            aria-selected={view === v.id}
+            onClick={() => router.replace(v.id === "hoy" ? "/comidas" : "/comidas?vista=compra", { scroll: false })}
+            className={cn("relative h-11 rounded-full text-sm font-semibold transition-colors", view === v.id ? "text-ink" : "text-mute")}
+          >
+            {view === v.id && (
+              <motion.span layoutId="food-pill" className="absolute inset-0 rounded-full bg-volt" transition={{ type: "spring", stiffness: 420, damping: 34 }} />
+            )}
+            <span className="relative">{v.label}</span>
+          </button>
+        ))}
+      </div>
+
+      {view === "compra" ? (
+        <ShoppingList />
+      ) : (
+        <>
 
       <section className="rounded-3xl border border-line bg-ink-2 p-5" aria-label="Resumen del día">
         <div className="mb-4 flex items-end justify-between">
@@ -51,7 +95,7 @@ export default function Comidas() {
         </div>
       </section>
 
-      {mealPlan.map((meal) => {
+      {plan.meals.map((meal) => {
         const sub = meal.items.reduce((a, it) => a + (eaten[`${date}:${it.id}`] ? it.kcal : 0), 0);
         const all = meal.items.reduce((a, it) => a + it.kcal, 0);
         return (
@@ -148,6 +192,9 @@ export default function Comidas() {
       >
         <Plus className="size-7" />
       </motion.button>
+
+        </>
+      )}
 
       {/* Hoja de añadir alimento */}
       <AnimatePresence>

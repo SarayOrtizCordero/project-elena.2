@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ArrowRight, Flame, TrendingDown } from "lucide-react";
+import { ArrowRight, Flame, ShoppingBasket, TrendingDown } from "lucide-react";
 import { cn } from "@elena/ui";
 import { Bar, Ring } from "@/components/ring";
 import { targets, weekDays, weekPlan } from "@/lib/data";
 import { todaysWorkout, useTotals, useWorkoutProgress } from "@/lib/derive";
 import { longDate } from "@/lib/hooks";
-import { useApp } from "@/lib/store";
+import { planForDate } from "@/lib/menu";
+import { dayKey, useApp } from "@/lib/store";
 
 const card = "rounded-3xl border border-line bg-ink-2 p-5 sm:p-6";
 
@@ -17,6 +18,8 @@ export default function Hoy() {
   const { workout, rest } = todaysWorkout();
   const prog = useWorkoutProgress(workout);
   const weights = useApp((s) => s.weights);
+  const planStart = useApp((s) => s.planStart);
+  const { week } = planForDate(dayKey(), planStart);
 
   const first = weights[0]?.kg ?? 0;
   const now = weights[weights.length - 1]?.kg ?? 0;
@@ -113,6 +116,18 @@ export default function Hoy() {
           </Link>
         </div>
       </div>
+
+      {/* Compra */}
+      <Link href="/comidas?vista=compra" className={cn(card, "flex items-center gap-4 transition-colors hover:border-volt/60")}>
+        <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-volt text-ink">
+          <ShoppingBasket className="size-6" aria-hidden />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block font-display-tight text-2xl font-bold">Lista de la compra</span>
+          <span className="block text-sm text-mute">Semana {week + 1} · según tu menú</span>
+        </span>
+        <ArrowRight className="size-5 shrink-0 text-volt" aria-hidden />
+      </Link>
 
       {/* Semana */}
       <section className={card} aria-label="Tu semana">
