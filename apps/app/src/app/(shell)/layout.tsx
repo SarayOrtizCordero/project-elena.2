@@ -111,7 +111,7 @@ export default function ShellLayout({ children }: { children: React.ReactNode })
       </aside>
 
       {/* Cabecera móvil */}
-      <header className="safe-top sticky top-0 z-30 glass-nav border-b border-white/10 lg:hidden">
+      <header className="safe-top sticky top-0 z-30 glass-nav border-b border-line lg:hidden">
         <div className="flex h-14 items-center justify-between px-4">
           <Logo className="text-xl" />
           <button
@@ -132,7 +132,7 @@ export default function ShellLayout({ children }: { children: React.ReactNode })
       {/* Tab bar móvil */}
       <nav
         aria-label="Principal"
-        className="safe-bottom fixed inset-x-0 bottom-0 z-40 glass-nav border-t border-white/10 lg:hidden"
+        className="safe-bottom fixed inset-x-0 bottom-0 z-40 glass-nav border-t border-line lg:hidden"
       >
         <ul className="mx-auto grid max-w-md" style={{ gridTemplateColumns: `repeat(${nav.length}, 1fr)` }}>
           {nav.map((n) => {

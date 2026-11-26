@@ -36,13 +36,13 @@ export function Plans() {
                 onClick={() => setMode(t.id)}
                 className={cn(
                   "relative z-10 h-11 flex-1 rounded-full px-1 font-display text-sm uppercase tracking-wide transition-colors min-[400px]:text-base sm:px-6 sm:text-lg md:flex-none",
-                  mode === t.id ? "text-on-accent" : "text-muted hover:text-fg",
+                  mode === t.id ? "text-on-brand" : "text-muted hover:text-fg",
                 )}
               >
                 {mode === t.id && (
                   <motion.span
                     layoutId="plan-pill"
-                    className="absolute inset-0 -z-10 rounded-full bg-accent"
+                    className="absolute inset-0 -z-10 rounded-full bg-brand"
                     transition={{ type: "spring", stiffness: 420, damping: 34 }}
                   />
                 )}
@@ -69,28 +69,28 @@ export function Plans() {
             transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
             className={cn(
               "relative flex flex-col rounded-3xl border p-7 transition-colors duration-300",
-              p.featured ? "border-accent bg-accent text-on-accent" : "glass hover:border-highlight/50",
+              p.featured ? "border-brand bg-brand text-on-brand" : "glass hover:border-highlight/50",
             )}
           >
             {p.badge && (
-              <span className="absolute -top-3 left-7 rounded-full bg-canvas px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-highlight">
+              <span className="absolute -top-3 left-7 rounded-full bg-accent px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-on-accent">
                 {p.badge}
               </span>
             )}
             <h3 className="font-display-tight text-4xl font-bold">{p.name}</h3>
             <p className="mt-4 flex items-baseline gap-1">
               <span className="font-display text-6xl leading-none">{p.price}€</span>
-              <span className={cn("text-sm", p.featured ? "text-on-accent/70" : "text-muted")}>{p.unit}</span>
+              <span className={cn("text-sm", p.featured ? "text-on-brand/80" : "text-muted")}>{p.unit}</span>
             </p>
             <ul className="mt-6 flex-1 space-y-3">
               {p.features.map((f) => (
                 <li key={f} className="flex items-start gap-3 text-sm">
-                  <Check className={cn("mt-0.5 size-5 shrink-0", p.featured ? "text-on-accent" : "text-highlight")} />
+                  <Check className={cn("mt-0.5 size-5 shrink-0", p.featured ? "text-accent" : "text-highlight")} />
                   {f}
                 </li>
               ))}
             </ul>
-            <Button href="#contacto" variant={p.featured ? "dark" : "primary"} className="mt-8 w-full">
+            <Button href="#contacto" variant={p.featured ? "primary" : "dark"} className="mt-8 w-full">
               Empezar
             </Button>
           </motion.article>

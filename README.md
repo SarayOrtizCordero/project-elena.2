@@ -34,8 +34,8 @@ vídeos subidos en IndexedDB: **solo en ese dispositivo**. Es instalable como PW
 Reglas de los bonos (`apps/app/src/lib/agenda.ts`): cada cita descuenta una sesión cuando llega su hora;
 la clienta solo puede cancelar con 24 h o más; Elena puede anular sin descontar o devolver una sesión.
 
-La web va en negro y amarillo (`packages/ui/src/theme.css`). La app usa cobalto y celeste con amarillo,
-elegido por Elena: sus colores se redefinen en `apps/app/src/app/globals.css`.
+Web y app usan cobalto y celeste con amarillo, elegido por Elena. Los colores están en
+`packages/ui/src/theme.css`; una sección en cobalto se marca con `data-tone="brand"`.
 
 ## Variables de entorno (opcionales)
 

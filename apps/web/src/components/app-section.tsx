@@ -1,72 +1,81 @@
-import { Check, Download, Smartphone } from "lucide-react";
+import { CalendarDays, Check, Download, Smartphone } from "lucide-react";
 import { Button, Reveal, RevealText } from "@elena/ui";
 import { APP_URL, appPoints, installSteps } from "@/lib/data";
 
 /** Maqueta del móvil con una réplica sencilla de la pantalla "Hoy" de la app (datos de ejemplo). */
 function Phone() {
-  const r = 46;
-  const c = 2 * Math.PI * r;
+  const week = [
+    ["L", "done"],
+    ["M", "done"],
+    ["X", "rest"],
+    ["J", "today"],
+    ["V", "todo"],
+    ["S", "rest"],
+    ["D", "rest"],
+  ];
   return (
     <div
       aria-hidden
-      className="relative mx-auto aspect-[9/18.5] w-[15.5rem] rounded-[2.6rem] border-[7px] border-[#1c1c1e] bg-black p-3 shadow-[0_30px_80px_-20px_rgb(250_204_21/0.4)] sm:w-[17rem]"
+      className="relative mx-auto aspect-[9/18.5] w-[15.5rem] rounded-[2.6rem] border-[7px] border-fg bg-canvas p-3 shadow-[0_30px_80px_-20px_rgb(27_63_196/0.45)] sm:w-[17rem]"
     >
-      <div className="absolute left-1/2 top-2.5 h-5 w-20 -translate-x-1/2 rounded-full bg-[#1c1c1e]" />
-      <div className="flex h-full flex-col gap-2.5 overflow-hidden rounded-[1.8rem] bg-canvas px-3 pb-3 pt-9">
+      <div className="absolute left-1/2 top-2.5 h-5 w-20 -translate-x-1/2 rounded-full bg-fg" />
+      <div className="flex h-full flex-col gap-2.5 overflow-hidden rounded-[1.8rem] pb-1 pt-8">
         <p className="font-display text-2xl leading-none">
           HOLA, <span className="text-highlight">LUCÍA</span>
         </p>
-        <div className="flex items-center gap-3 rounded-2xl border border-line bg-surface p-3">
-          <svg viewBox="0 0 110 110" className="size-[4.6rem] shrink-0 -rotate-90">
-            <circle cx="55" cy="55" r={r} fill="none" stroke="#1b1b1f" strokeWidth="11" />
-            <circle
-              cx="55"
-              cy="55"
-              r={r}
-              fill="none"
-              stroke="var(--color-accent)"
-              strokeWidth="11"
-              strokeLinecap="round"
-              strokeDasharray={c}
-              strokeDashoffset={c * 0.38}
-            />
-          </svg>
-          <div>
-            <p className="font-display text-3xl leading-none">1.330</p>
-            <p className="text-[10px] uppercase tracking-widest text-muted">kcal hoy</p>
+
+        <div className="rounded-2xl bg-brand p-3 text-on-brand">
+          <div className="flex items-center justify-between">
+            <p className="font-display text-lg leading-none">TU SEMANA</p>
+            <p className="rounded-full bg-accent px-2 py-0.5 font-display text-sm leading-tight text-on-accent">2/4</p>
+          </div>
+          <div className="mt-2.5 grid grid-cols-7 gap-1">
+            {week.map(([d, state]) => (
+              <span
+                key={d}
+                className={
+                  "grid aspect-square place-items-center rounded-md border text-[9px] font-bold " +
+                  (state === "done"
+                    ? "border-accent bg-accent text-on-accent"
+                    : state === "today"
+                      ? "border-accent"
+                      : state === "rest"
+                        ? "border-dashed border-on-brand/40 text-on-brand/70"
+                        : "border-on-brand/40")
+                }
+              >
+                {state === "done" ? <Check className="size-3" strokeWidth={4} /> : d}
+              </span>
+            ))}
           </div>
         </div>
+
+        <div className="flex items-center gap-2.5 rounded-2xl border border-line bg-surface p-3">
+          <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-alt text-on-alt">
+            <CalendarDays className="size-4" />
+          </span>
+          <div>
+            <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-highlight">Tu próxima cita</p>
+            <p className="text-[11px] font-semibold">Viernes · 10:00</p>
+            <p className="text-[10px] text-muted">Quedan 5 sesiones</p>
+          </div>
+        </div>
+
         <div className="rounded-2xl border border-line bg-surface p-3">
           <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-highlight">Entreno de hoy</p>
-          <p className="mt-1 font-display text-2xl leading-none">EMPUJE</p>
+          <p className="mt-1 font-display text-2xl leading-none">TIRÓN</p>
           <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-raised">
             <div className="h-full w-[62%] rounded-full bg-highlight" />
           </div>
-          <p className="mt-1.5 text-[10px] text-muted">10 de 16 series</p>
+          <p className="mt-1.5 text-[10px] text-muted">8 de 13 series</p>
+          <p className="mt-2 inline-block rounded-full bg-accent px-3 py-1 font-display text-xs uppercase text-on-accent">Continuar</p>
         </div>
-        <div className="rounded-2xl border border-line bg-surface p-3">
-          <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-highlight">Comidas</p>
-          <ul className="mt-2 space-y-1.5 text-[10px]">
-            {[
-              ["Tostadas con aguacate", "320"],
-              ["Yogur griego con fruta", "190"],
-              ["Pechuga a la plancha", "300"],
-            ].map(([n, k]) => (
-              <li key={n} className="flex items-center justify-between gap-2">
-                <span className="flex items-center gap-1.5">
-                  <span className="size-2.5 rounded-full bg-highlight" />
-                  {n}
-                </span>
-                <span className="text-muted">{k}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+
         <div className="mt-auto grid grid-cols-4 gap-1 border-t border-line pt-2 text-center text-[8px] font-semibold text-muted">
           <span className="text-highlight">Hoy</span>
           <span>Entreno</span>
           <span>Comidas</span>
-          <span>Progreso</span>
+          <span>Citas</span>
         </div>
       </div>
     </div>
@@ -76,7 +85,7 @@ function Phone() {
 export function AppSection() {
   return (
     <section id="app" className="relative overflow-hidden border-t border-line">
-      <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 size-[34rem] -translate-y-1/2 translate-x-[5%] rounded-full bg-highlight/15 blur-[120px] lg:translate-x-[20%]" />
+      <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 size-[34rem] -translate-y-1/2 translate-x-[5%] rounded-full bg-alt/60 blur-[120px] lg:translate-x-[20%]" />
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-28 lg:grid-cols-[1.05fr_0.95fr]">
         <div>

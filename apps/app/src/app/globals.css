@@ -2,43 +2,6 @@
 @import "@elena/ui/theme.css";
 @source "../../../../packages/ui/src";
 
-/* ── Color de la app, elegido por Elena: cobalto y celeste con amarillo ──
-   1) canvas y surface: neutro claro, lo que más se ve (≈60 %)
-   2) brand: cobalto, en el bloque principal, la selección y los títulos (≈30 %)
-   3) accent: amarillo, solo para la acción principal y lo conseguido (≈10 %)
-   4) alt: celeste, en avisos e iconos */
-:root {
-  --color-canvas: #f3f7ff;
-  --color-surface: #ffffff;
-  --color-raised: #e5edff;
-  --color-line: #d0dcf8;
-  --color-fg: #0a1f66;
-  --color-muted: #46557f;
-  --color-brand: #1b3fc4;
-  --color-on-brand: #ffffff;
-  --color-accent: #ffe135;
-  --color-accent-hover: #ffea6b;
-  --color-on-accent: #0a1f66;
-  --color-highlight: #1b3fc4;
-  --color-alt: #a9e4ff;
-  --color-on-alt: #0a1f66;
-  --color-ok: #0a6b42;
-  --color-bad: #ab2015;
-  --color-pop-1: #bd3b2b;
-  --color-pop-2: #0c7350;
-  --color-pop-3: #1d59b3;
-  --color-pop-4: #8a2f9e;
-}
-
-/* El cristal toma el color de la app */
-:root {
-  --glass-bg: color-mix(in srgb, var(--color-surface) 76%, transparent);
-  --glass-strong-bg: color-mix(in srgb, var(--color-surface) 92%, transparent);
-  --glass-nav-bg: color-mix(in srgb, var(--color-canvas) 92%, transparent);
-  --glass-solid-bg: var(--color-surface);
-  --glass-border: var(--color-line);
-}
-
 html,
 body {
   overscroll-behavior-y: none;

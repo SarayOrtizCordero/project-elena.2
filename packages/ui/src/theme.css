@@ -1,15 +1,17 @@
 /* Sistema de diseño ElenitaFit, compartido por apps/web y apps/app.
-   Los colores se nombran por su FUNCIÓN: así una paleta nueva solo cambia estas variables.
-   Aquí está el tema de la WEB (negro y amarillo). La app los redefine en su globals.css.
+   Color elegido por Elena: cobalto y celeste con amarillo, sobre neutro claro.
+   Los colores se nombran por su FUNCIÓN y se reparten siempre igual:
 
-   canvas     fondo de la página (≈60 %)  brand    color principal: bloques y selección (≈30 %)
+   canvas     fondo de la página (≈60 %)  brand    cobalto: bloques y selección (≈30 %)
    accent     amarillo: acción y logro (≈10 %)  on-brand  texto encima de brand
    surface    tarjetas                  on-accent  texto encima de accent
    raised     elementos sobre tarjetas  highlight  texto, iconos y barras de color sobre el fondo
-   line       bordes                    alt        segundo bloque de color · on-alt su texto
+   line       bordes                    alt        celeste: avisos e iconos · on-alt su texto
    fg / muted texto principal/secundario  ok / bad   bien / atención
    pop-1..4   categorías (macros, tipos de cita…)
-   sun        amarillo fijo, solo para texto sobre fotos oscurecidas */
+   sun        amarillo fijo, solo para texto sobre fotos oscurecidas
+
+   Una sección entera en cobalto se marca con data-tone="brand". */
 
 @theme inline {
   --font-display: var(--nf-display), "Arial Narrow", Impact, sans-serif;
@@ -17,27 +19,27 @@
 }
 
 @theme {
-  --color-canvas: #000000;
-  --color-surface: #0b0b0c;
-  --color-raised: #161617;
-  --color-line: #232326;
-  --color-fg: #f6f5ef;
-  --color-muted: #a1a1aa;
-  --color-brand: #facc15;
-  --color-on-brand: #000000;
-  --color-accent: #facc15;
-  --color-accent-hover: #fde047;
-  --color-on-accent: #000000;
-  --color-highlight: #facc15;
-  --color-alt: #161617;
-  --color-on-alt: #f6f5ef;
-  --color-ok: #4ade80;
-  --color-bad: #f87171;
-  --color-pop-1: #fb923c;
-  --color-pop-2: #4ade80;
-  --color-pop-3: #38bdf8;
-  --color-pop-4: #f472b6;
-  --color-sun: #facc15;
+  --color-canvas: #f3f7ff;
+  --color-surface: #ffffff;
+  --color-raised: #e5edff;
+  --color-line: #d0dcf8;
+  --color-fg: #0a1f66;
+  --color-muted: #46557f;
+  --color-brand: #1b3fc4;
+  --color-on-brand: #ffffff;
+  --color-accent: #ffe135;
+  --color-accent-hover: #ffea6b;
+  --color-on-accent: #0a1f66;
+  --color-highlight: #1b3fc4;
+  --color-alt: #a9e4ff;
+  --color-on-alt: #0a1f66;
+  --color-ok: #0a6b42;
+  --color-bad: #ab2015;
+  --color-pop-1: #bd3b2b;
+  --color-pop-2: #0c7350;
+  --color-pop-3: #1d59b3;
+  --color-pop-4: #8a2f9e;
+  --color-sun: #ffe135;
 
   --radius-card: 1.5rem;
 
@@ -69,13 +71,29 @@
   }
 }
 
-/* Cristal: valores de la web; la app los adapta a cada paleta. */
-:root {
-  --glass-bg: rgb(0 0 0 / 0.55);
-  --glass-strong-bg: rgb(0 0 0 / 0.78);
-  --glass-nav-bg: rgb(0 0 0 / 0.88);
-  --glass-solid-bg: #0b0b0c;
-  --glass-border: rgb(255 255 255 / 0.14);
+/* Cristal: toma el color de la zona donde está */
+:root,
+[data-tone="brand"] {
+  --glass-bg: color-mix(in srgb, var(--color-surface) 76%, transparent);
+  --glass-strong-bg: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  --glass-nav-bg: color-mix(in srgb, var(--color-canvas) 92%, transparent);
+  --glass-solid-bg: var(--color-surface);
+  --glass-border: var(--color-line);
+}
+
+/* Sección en cobalto: mismas funciones, colores invertidos */
+[data-tone="brand"] {
+  --color-canvas: #1b3fc4;
+  --color-surface: #1737ad;
+  --color-raised: #12308f;
+  --color-line: rgb(255 255 255 / 0.22);
+  --color-fg: #ffffff;
+  --color-muted: #dbe5ff;
+  --color-highlight: #ffe135;
+  --color-brand: #ffffff;
+  --color-on-brand: #0a1f66;
+  background-color: var(--color-canvas);
+  color: var(--color-fg);
 }
 
 @layer base {

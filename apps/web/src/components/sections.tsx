@@ -6,11 +6,11 @@ import { Photo } from "./photo";
 export function Marquee() {
   const items = [...marquee, ...marquee];
   return (
-    <div aria-hidden className="overflow-hidden border-y border-line bg-accent py-3 text-on-accent">
+    <div aria-hidden className="overflow-hidden bg-brand py-3 text-on-brand">
       <div className="flex w-max animate-marquee gap-10 whitespace-nowrap">
         {[...items, ...items].map((w, i) => (
           <span key={i} className="flex items-center gap-10 font-display text-2xl uppercase tracking-wide sm:text-3xl">
-            {w} <span className="size-1.5 rounded-full bg-canvas" />
+            {w} <span className="size-2 rounded-full bg-accent" />
           </span>
         ))}
       </div>
@@ -19,7 +19,7 @@ export function Marquee() {
 }
 
 function Glow({ className }: { className?: string }) {
-  return <div aria-hidden className={`pointer-events-none absolute -z-10 size-[26rem] rounded-full bg-highlight/12 blur-[120px] ${className ?? ""}`} />;
+  return <div aria-hidden className={`pointer-events-none absolute -z-10 size-[26rem] rounded-full bg-alt/45 blur-[120px] ${className ?? ""}`} />;
 }
 
 function SectionTitle({ kicker, title }: { kicker: string; title: string }) {
@@ -47,12 +47,12 @@ export function Services() {
               {s.photo ? (
                 <Photo src={s.photo} alt={s.alt} sizes="(min-width: 768px) 50vw, 100vw" className="-mx-7 -mt-7 mb-7 aspect-[16/9] sm:-mx-9 sm:-mt-9 sm:mb-8" />
               ) : (
-                <div aria-hidden className="-mx-7 -mt-7 mb-7 grid aspect-[16/9] place-items-center overflow-hidden bg-accent text-on-accent sm:-mx-9 sm:-mt-9 sm:mb-8">
+                <div aria-hidden className="-mx-7 -mt-7 mb-7 grid aspect-[16/9] place-items-center overflow-hidden bg-alt text-on-alt sm:-mx-9 sm:-mt-9 sm:mb-8">
                   <Salad className="size-32" strokeWidth={1.25} />
                 </div>
               )}
               <div className="mb-8 flex items-center justify-between">
-                <span className="grid size-14 place-items-center rounded-2xl bg-accent text-on-accent">
+                <span className="grid size-14 place-items-center rounded-2xl bg-brand text-on-brand">
                   {s.id === "online" ? <Smartphone className="size-7" /> : s.id === "nutricion" ? <Salad className="size-7" /> : s.id === "combo" ? <Sparkles className="size-7" /> : <Dumbbell className="size-7" />}
                 </span>
                 <span className="rounded-full border border-line px-3 py-1 text-xs uppercase tracking-widest text-muted">
@@ -79,8 +79,7 @@ export function Services() {
 
 export function Method() {
   return (
-    <section id="metodo" className="relative isolate border-y border-line">
-      <Glow className="left-[10%] top-[20%]" />
+    <section id="metodo" data-tone="brand" className="relative isolate">
       <div className="mx-auto max-w-6xl px-5 py-28">
         <SectionTitle kicker="Método" title="Simple, claro y *a tu medida*" />
         <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -116,7 +115,6 @@ export function Gallery() {
                 <Photo
                   src={g.src}
                   alt={g.alt}
-                  tone={i === 0 ? "yellow" : "mono"}
                   sizes="(min-width: 768px) 25vw, 50vw"
                   className="size-full"
                   imgClassName="transition-transform duration-700 group-hover:scale-105"
@@ -142,7 +140,7 @@ export function About() {
       <div className="mx-auto grid max-w-6xl items-center gap-14 px-5 py-28 md:grid-cols-2">
         <Reveal from="left" y={48}>
           <div className="overflow-hidden rounded-3xl border border-line">
-            <Photo src="/photos/strong.jpg" alt="Mujer estirando los brazos en un estudio de entrenamiento" tone="yellow" sizes="(min-width: 768px) 45vw, 100vw" className="aspect-square w-full" />
+            <Photo src="/photos/strong.jpg" alt="Mujer estirando los brazos en un estudio de entrenamiento" sizes="(min-width: 768px) 45vw, 100vw" className="aspect-square w-full" />
           </div>
         </Reveal>
         <div>
@@ -185,7 +183,7 @@ export function Testimonials() {
               </div>
               <blockquote className="text-lg">&ldquo;{t.text}&rdquo;</blockquote>
               <figcaption className="mt-6 flex items-center gap-3 text-sm">
-                <span className="grid size-10 place-items-center rounded-full bg-accent font-display text-lg text-on-accent">
+                <span className="grid size-10 place-items-center rounded-full bg-alt font-display text-lg text-on-alt">
                   {t.name[0]}
                 </span>
                 <span>

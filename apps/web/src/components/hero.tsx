@@ -29,7 +29,7 @@ export function Hero() {
     <section id="top" className="relative overflow-hidden pt-28 pb-16 sm:pt-32 lg:pb-24">
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-40 -right-40 size-[38rem] rounded-full bg-highlight/10 blur-[140px]"
+        className="pointer-events-none absolute -top-40 -right-40 size-[38rem] rounded-full bg-alt/55 blur-[140px]"
       />
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 lg:grid-cols-[1.1fr_0.9fr]">
         <motion.div variants={container} initial="hidden" animate="show">

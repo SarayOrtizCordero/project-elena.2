@@ -29,7 +29,7 @@ export function Header() {
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-          "glass-nav border-b border-white/10",
+          "glass-nav border-b border-line",
         )}
       >
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">

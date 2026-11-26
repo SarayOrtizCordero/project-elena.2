@@ -23,8 +23,8 @@ export function Contact() {
   }
 
   return (
-    <section id="contacto" className="relative overflow-hidden">
-      <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-40 size-[34rem] rounded-full bg-highlight/10 blur-[140px]" />
+    <section id="contacto" data-tone="brand" className="relative overflow-hidden">
+      <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-40 size-[34rem] rounded-full bg-alt/25 blur-[140px]" />
       <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-24 lg:grid-cols-2">
         <Reveal>
           <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-highlight">
@@ -85,7 +85,7 @@ export function Contact() {
                     </label>
                   </div>
                   <label className="flex items-start gap-3 text-sm text-muted">
-                    <input required type="checkbox" className="mt-1 size-4 accent-accent" />
+                    <input required type="checkbox" className="mt-1 size-4 accent-highlight" />
                     Acepto que se traten mis datos para contactarme (política de privacidad).
                   </label>
                   <Button type="submit" size="lg" className="w-full" disabled={loading}>
