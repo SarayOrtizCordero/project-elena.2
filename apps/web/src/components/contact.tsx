@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { CheckCircle2, Copy, Send } from "lucide-react";
+import { CheckCircle2, Clock, Copy, MapPin, Send } from "lucide-react";
 import { Button, Reveal, RevealText, cn } from "@elena/ui";
-import { WHATSAPP_NUMBER, WHATSAPP_URL } from "@/lib/data";
+import { LOCATION, WHATSAPP_NUMBER, WHATSAPP_URL } from "@/lib/data";
 import { buildMessage, levels, nutritionGoals, places, services, trainingGoals, type ServiceId } from "@/lib/intake";
 
 const field =
@@ -113,6 +113,26 @@ export function Contact() {
               <Button href={WHATSAPP_URL} variant="dark" size="lg">
                 Prefiero escribir por WhatsApp
               </Button>
+            </div>
+            <div className="mt-10 space-y-4 border-t border-line pt-8 text-sm">
+              <p className="flex items-start gap-3">
+                <MapPin className="mt-0.5 size-5 shrink-0 text-highlight" aria-hidden />
+                <span>
+                  <strong className="block text-base">{LOCATION.name}</strong>
+                  <a href={LOCATION.mapUrl} target="_blank" rel="noopener noreferrer" className="text-muted underline-offset-4 hover:underline">
+                    {LOCATION.street}
+                  </a>
+                </span>
+              </p>
+              <p className="flex items-start gap-3">
+                <Clock className="mt-0.5 size-5 shrink-0 text-highlight" aria-hidden />
+                <span>
+                  <strong className="block text-base">Horario</strong>
+                  {LOCATION.hours.map((h) => (
+                    <span key={h} className="block text-muted">{h}</span>
+                  ))}
+                </span>
+              </p>
             </div>
           </div>
         </Reveal>

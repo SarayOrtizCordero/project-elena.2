@@ -28,6 +28,22 @@ export type Pack = { id: string; clientId: string; sessions: number; date: strin
 /** Lunes (0) → domingo (6): horas en las que Elena atiende. */
 export type Availability = Record<number, string[]>;
 
+/** Dónde y cuándo se dan las sesiones presenciales. */
+export const GYM = {
+  name: "ACTIVA-T",
+  address: "Calle Blas Infante, 5",
+  schedule: "L-V 8:00 a 22:00 · S 10:00 a 13:00",
+};
+
+/**
+ * Horas en las que se puede empezar una sesión (de una hora) según el horario del gimnasio.
+ * Lunes (0) → domingo (6): L-V 8:00-22:00, sábado 10:00-13:00, domingo cerrado.
+ */
+export function gymHours(weekday: number): string[] {
+  const [from, to] = weekday <= 4 ? [8, 22] : weekday === 5 ? [10, 13] : [0, 0];
+  return Array.from({ length: to - from }, (_, i) => `${pad(from + i)}:00`);
+}
+
 /** Antelación mínima para que la clienta pueda cancelar. */
 export const CANCEL_HOURS = 24;
 
@@ -58,7 +74,10 @@ export function bonus(clientId: string, appointments: Appointment[], packs: Pack
 export function freeSlots(date: string, availability: Availability, appointments: Appointment[], now: Date = new Date()) {
   const [y, m, d] = date.split("-").map(Number);
   const taken = new Set(appointments.filter((a) => a.status === "booked").map((a) => a.start));
-  return [...(availability[weekdayOf(new Date(y, m - 1, d))] ?? [])]
+  const weekday = weekdayOf(new Date(y, m - 1, d));
+  const open = gymHours(weekday);
+  return [...(availability[weekday] ?? [])]
+    .filter((time) => open.includes(time))
     .sort()
     .filter((time) => !taken.has(`${date}T${time}`) && new Date(`${date}T${time}`) > now);
 }

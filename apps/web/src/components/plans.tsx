@@ -100,7 +100,7 @@ export function Plans() {
           <span className="h-px w-8 bg-highlight" /> Presencial
         </p>
         <h3 className="font-display-tight text-4xl font-extrabold sm:text-5xl">Bonos de entreno personal</h3>
-        <p className="mt-3 max-w-2xl text-muted">Sesiones en sala con Elena. Pagas el bono una vez y reservas tus citas desde la app.</p>
+        <p className="mt-3 max-w-2xl text-muted">Sesiones con Elena en ACTIVA-T (Calle Blas Infante, 5). Pagas el bono una vez y reservas tus citas desde la app.</p>
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           {bonos.map((b) => (
             <article

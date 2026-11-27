@@ -8,6 +8,14 @@ export const INSTAGRAM_URL = "https://www.instagram.com/eleniitaafit";
 export const WHATSAPP_NUMBER = "34644471996";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola Elena, quiero info")}`;
 
+/** Dónde se dan las sesiones presenciales. */
+export const LOCATION = {
+  name: "ACTIVA-T",
+  street: "Calle Blas Infante, 5",
+  hours: ["Lunes a viernes: 8:00 a 22:00", "Sábados: 10:00 a 13:00"],
+  mapUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("ACTIVA-T, Calle Blas Infante, 5")}`,
+};
+
 export const nav = [
   { href: "#servicios", label: "Servicios" },
   { href: "#metodo", label: "Método" },

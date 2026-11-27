@@ -1,5 +1,5 @@
 import { Logo, LogoBadge, Reveal } from "@elena/ui";
-import { APP_URL, INSTAGRAM_URL, WHATSAPP_URL, nav } from "@/lib/data";
+import { APP_URL, INSTAGRAM_URL, LOCATION, WHATSAPP_URL, nav } from "@/lib/data";
 
 function InstagramIcon() {
   return (
@@ -19,6 +19,11 @@ export function Footer() {
           <LogoBadge className="mb-4 size-28" />
           <Logo />
           <p className="mt-3 max-w-xs text-sm text-muted">Entreno personal, online y nutrición.</p>
+          <p className="mt-3 max-w-xs text-sm text-muted">
+            {LOCATION.name} · {LOCATION.street}
+            <br />
+            L-V 8:00 a 22:00 · S 10:00 a 13:00
+          </p>
         </div>
         <nav aria-label="Pie" className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
           {nav.map((l) => (

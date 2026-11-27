@@ -6,7 +6,7 @@ import { BellRing, Lock } from "lucide-react";
 import { cn } from "@elena/ui";
 import { BonusMeter, CalendarButton, dayLabel, kindTone, timeLabel, useBonus } from "@/components/agenda-bits";
 import { useToast } from "@/components/toast";
-import { CANCEL_HOURS, canCancel, freeSlots, isPast, kinds, type AppointmentKind } from "@/lib/agenda";
+import { CANCEL_HOURS, GYM, canCancel, freeSlots, isPast, kinds, type AppointmentKind } from "@/lib/agenda";
 import { DEMO_CLIENT, dayKey, useApp } from "@/lib/store";
 
 const card = "rounded-3xl border border-line bg-surface p-5";
@@ -57,7 +57,8 @@ export default function Citas() {
         <h1 className="font-display-tight text-5xl font-extrabold sm:text-6xl">
           Mis <span className="text-highlight">citas</span>
         </h1>
-        <p className="text-muted">Sesiones presenciales con Elena.</p>
+        <p className="text-muted">Sesiones presenciales con Elena en {GYM.name}, {GYM.address}.</p>
+        <p className="text-sm text-muted">Horario del gimnasio: {GYM.schedule}</p>
       </div>
 
       {unseen.length > 0 && (

@@ -7,14 +7,13 @@ import { ChevronDown, Plus, RotateCcw, X } from "lucide-react";
 import { cn } from "@elena/ui";
 import { dayLabel, kindTone, timeLabel } from "@/components/agenda-bits";
 import { useToast } from "@/components/toast";
-import { bonus, freeSlots, isPast, kinds, type Appointment, type AppointmentKind } from "@/lib/agenda";
+import { GYM, bonus, freeSlots, gymHours, isPast, kinds, type Appointment, type AppointmentKind } from "@/lib/agenda";
 import { clients, weekDays } from "@/lib/data";
 import { dayNames } from "@/lib/menu";
 import { dayKey, useApp } from "@/lib/store";
 
 const card = "rounded-3xl border border-line bg-surface p-5";
 const field = "h-12 w-full rounded-2xl border border-line bg-canvas px-4 text-fg focus:border-highlight focus:outline-none";
-const hours = Array.from({ length: 16 }, (_, i) => `${String(i + 6).padStart(2, "0")}:00`);
 const nameOf = (id: string) => clients.find((c) => c.id === id)?.name ?? "Cliente";
 
 export default function Page() {
@@ -227,7 +226,7 @@ function Agenda() {
         <button type="button" onClick={() => setSchedule((v) => !v)} aria-expanded={schedule} className="flex w-full items-center justify-between gap-3 text-left">
           <span>
             <span className="font-display-tight block text-3xl font-bold">Mi horario</span>
-            <span className="text-sm text-muted">Las horas que tus clientes pueden reservar.</span>
+            <span className="text-sm text-muted">Las horas que tus clientes pueden reservar, dentro del horario de {GYM.name} ({GYM.schedule}).</span>
           </span>
           <ChevronDown className={cn("size-6 shrink-0 text-highlight transition-transform", schedule && "rotate-180")} aria-hidden />
         </button>
@@ -248,7 +247,8 @@ function Agenda() {
               ))}
             </div>
             <div className="grid grid-cols-4 gap-2 sm:grid-cols-8" role="group" aria-label={`Horas del ${dayNames[weekday].toLowerCase()}`}>
-              {hours.map((t) => {
+              {gymHours(weekday).length === 0 && <p className="col-span-full text-sm text-muted">El gimnasio está cerrado este día.</p>}
+              {gymHours(weekday).map((t) => {
                 const on = availability[weekday]?.includes(t) ?? false;
                 return (
                   <button
