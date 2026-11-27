@@ -36,7 +36,7 @@ export function ClientBonus({ clientId, firstName }: { clientId: string; firstNa
 
       <p className="mt-5 mb-2 text-sm text-muted">Cuando te pague, añade su bono:</p>
       <div className="flex flex-wrap gap-2">
-        {[4, 8, 10].map((n) => (
+        {[8, 10, 12].map((n) => (
           <button key={n} type="button" onClick={() => add(n)} className="inline-flex h-11 items-center gap-1.5 rounded-full bg-accent px-5 text-sm font-bold text-on-accent active:scale-95">
             <Plus className="size-4" aria-hidden /> {n} sesiones
           </button>

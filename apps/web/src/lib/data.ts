@@ -92,16 +92,16 @@ export const plans: Record<"online" | "presencial" | "nutricion" | "combo", Plan
     { name: "Trimestral", price: 149, unit: "/3 meses", features: ["Todo lo de Pro", "Ahorra 28 €", "Sesión de videollamada", "Prioridad en respuestas"] },
   ],
   presencial: [
-    { name: "Bono 4", price: 70, unit: "/mes", features: ["4 sesiones al mes", "Valoración inicial", "Plan de nutrición base"] },
+    { name: "Bono 8", price: 120, unit: "· 8 sesiones", features: ["8 sesiones de entreno personal", "Técnica corregida al momento", "Rutina a tu medida", "Reserva de citas desde la app"] },
     {
-      name: "Bono 8",
-      price: 120,
-      unit: "/mes",
+      name: "Bono 10",
+      price: 140,
+      unit: "· 10 sesiones",
       badge: "Más elegido",
       featured: true,
-      features: ["8 sesiones al mes", "Valoración y medidas", "Plan de nutrición completo", "Acceso a la app", "Chat directo con Elena"],
+      features: ["10 sesiones de entreno personal", "Técnica corregida al momento", "Rutina a tu medida", "Reserva de citas desde la app"],
     },
-    { name: "Híbrido", price: 160, unit: "/mes", features: ["8 sesiones + online", "Ajustes semanales", "App y chat sin límites", "Prioridad de agenda"] },
+    { name: "Bono 12", price: 160, unit: "· 12 sesiones", features: ["12 sesiones de entreno personal", "Técnica corregida al momento", "Rutina a tu medida", "Reserva de citas desde la app"] },
   ],
   nutricion: [
     { name: "Plan base", price: 25, unit: "/mes", features: ["Plan de comidas personalizado", "Calorías y macros", "Lista de la compra", "Soporte por email"] },
@@ -137,11 +137,11 @@ export const transformations = [
 
 export const testimonials = [
   { name: "Lucía M.", text: "Por fin un plan que encaja con mi vida. La app me lo pone fácil y Elena siempre responde.", mode: "Online", stars: 5 },
-  { name: "Javier P.", text: "Muy buen trato y rutinas bien explicadas. Me habría gustado más variedad de comidas al principio, pero lo ajustó enseguida.", mode: "Presencial", stars: 4 },
+  { name: "Javier P.", text: "Muy buen trato y rutinas bien explicadas. Elena ajusta todo a lo que necesito en cada momento.", mode: "Presencial", stars: 4 },
   { name: "Marta G.", text: "Vine sin saber ni coger una barra. Ahora entreno con confianza y se nota en todo.", mode: "Presencial", stars: 5 },
-  { name: "Daniel R.", text: "El seguimiento semanal marca la diferencia. Con el trabajo no siempre llego a todo, pero nunca me he sentido solo en el proceso.", mode: "Híbrido", stars: 4 },
+  { name: "Daniel R.", text: "El seguimiento semanal marca la diferencia. Nunca me he sentido solo en el proceso.", mode: "Híbrido", stars: 4 },
   { name: "Carla S.", text: "Me ha ayudado a coger el hábito de entrenar tres días por semana. La app es sencilla y los vídeos ayudan mucho.", mode: "Online", stars: 5 },
-  { name: "Álvaro T.", text: "Resultados reales en pocos meses. La app podría tener más recordatorios, pero Elena es muy cercana.", mode: "Híbrido", stars: 4 },
+  { name: "Álvaro T.", text: "Resultados reales en pocos meses. Elena es muy cercana y la app lo pone fácil.", mode: "Híbrido", stars: 4 },
 ];
 
 export const faqs = [
