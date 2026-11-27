@@ -136,9 +136,12 @@ export const transformations = [
 ];
 
 export const testimonials = [
-  { name: "Lucía M.", text: "Por fin un plan que encaja con mi vida. La app me lo pone fácil y Elena siempre responde.", mode: "Online" },
-  { name: "Marta G.", text: "Vine sin saber ni coger una barra. Ahora entreno con confianza y se nota en todo.", mode: "Presencial" },
-  { name: "Carla R.", text: "El seguimiento semanal marca la diferencia. Nunca me he sentido sola en el proceso.", mode: "Híbrido" },
+  { name: "Lucía M.", text: "Por fin un plan que encaja con mi vida. La app me lo pone fácil y Elena siempre responde.", mode: "Online", stars: 5 },
+  { name: "Javier P.", text: "Muy buen trato y rutinas bien explicadas. Me habría gustado más variedad de comidas al principio, pero lo ajustó enseguida.", mode: "Presencial", stars: 4 },
+  { name: "Marta G.", text: "Vine sin saber ni coger una barra. Ahora entreno con confianza y se nota en todo.", mode: "Presencial", stars: 5 },
+  { name: "Daniel R.", text: "El seguimiento semanal marca la diferencia. Con el trabajo no siempre llego a todo, pero nunca me he sentido solo en el proceso.", mode: "Híbrido", stars: 4 },
+  { name: "Carla S.", text: "Me ha ayudado a coger el hábito de entrenar tres días por semana. La app es sencilla y los vídeos ayudan mucho.", mode: "Online", stars: 5 },
+  { name: "Álvaro T.", text: "Resultados reales en pocos meses. La app podría tener más recordatorios, pero Elena es muy cercana.", mode: "Híbrido", stars: 4 },
 ];
 
 export const faqs = [

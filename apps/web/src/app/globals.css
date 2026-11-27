@@ -5,3 +5,14 @@
 section[id] {
   scroll-margin-top: 5rem;
 }
+
+/* Plan B si el JavaScript no arranca: nada se queda invisible por las animaciones de aparición. */
+.no-js-fallback [style*="opacity"] {
+  opacity: 1 !important;
+  transform: none !important;
+  translate: none !important;
+}
+.no-js-fallback [style*="translateY(108%)"],
+.no-js-fallback [style*="translate(0px, 108%)"] {
+  transform: none !important;
+}

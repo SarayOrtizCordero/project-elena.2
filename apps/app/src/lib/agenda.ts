@@ -3,7 +3,7 @@
 export type AppointmentKind = "entreno" | "valoracion" | "nutricion" | "otro";
 
 export const kinds: Record<AppointmentKind, string> = {
-  entreno: "Entrenamiento",
+  entreno: "Entrenamiento presencial",
   valoracion: "Valoración y medidas",
   nutricion: "Consulta de nutrición",
   otro: "Otra consulta",

@@ -171,14 +171,14 @@ export function Testimonials() {
   return (
     <section className="relative isolate mx-auto max-w-6xl px-5 py-28">
       <Glow className="left-[5%] top-[30%]" />
-      <SectionTitle kicker="Opiniones" title="Lo que dicen *mis clientas*" />
-      <div className="grid gap-5 md:grid-cols-3">
+      <SectionTitle kicker="Opiniones" title="Lo que dicen *mis clientes*" />
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {testimonials.map((t, i) => (
           <Reveal key={t.name} delay={i * 0.12}>
             <figure className="glass h-full rounded-3xl p-7">
-              <div className="mb-4 flex gap-1 text-highlight" aria-label="5 de 5 estrellas">
+              <div className="mb-4 flex gap-1 text-highlight" role="img" aria-label={`${t.stars} de 5 estrellas`}>
                 {Array.from({ length: 5 }).map((_, k) => (
-                  <Star key={k} className="size-5 fill-current" />
+                  <Star key={k} className={k < t.stars ? "size-5 fill-current" : "size-5 opacity-30"} aria-hidden />
                 ))}
               </div>
               <blockquote className="text-lg">&ldquo;{t.text}&rdquo;</blockquote>

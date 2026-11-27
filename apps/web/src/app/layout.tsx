@@ -44,6 +44,15 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={`${display.variable} ${sans.variable}`}>
+      <head>
+        {/* Si en 3 s la página no ha arrancado (navegador antiguo o error), se muestra el contenido sin animaciones. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "setTimeout(function(){if(!window.__elenaReady){document.documentElement.className+=' no-js-fallback'}},3000)",
+          }}
+        />
+      </head>
       <body>
         <MotionProvider>{children}</MotionProvider>
       </body>
