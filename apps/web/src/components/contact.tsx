@@ -32,7 +32,7 @@ function Choice({ name, legend, options, hint }: { name: string; legend: string;
         {options.map((o, i) => (
           <label key={o} className="relative">
             <input type="radio" name={name} value={o} required={i === 0} className="peer absolute inset-0 size-full cursor-pointer opacity-0" />
-            <span className="inline-flex min-h-11 items-center rounded-full border border-line bg-canvas px-4 text-sm text-fg transition-colors peer-checked:border-brand peer-checked:bg-brand peer-checked:text-on-brand peer-focus-visible:ring-2 peer-focus-visible:ring-highlight">
+            <span className="inline-flex min-h-11 items-center rounded-full border border-line bg-canvas px-4 text-sm text-fg transition-colors peer-checked:border-brand peer-checked:bg-brand peer-checked:text-on-brand peer-checked:shadow-[0_0_0_3px_var(--color-accent)] peer-focus-visible:ring-2 peer-focus-visible:ring-highlight">
               {o}
             </span>
           </label>
@@ -40,6 +40,16 @@ function Choice({ name, legend, options, hint }: { name: string; legend: string;
       </div>
     </fieldset>
   );
+}
+
+/** Título de bloque con marca amarilla. */
+function Title({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="flex items-center gap-3">
+      <span aria-hidden className="h-6 w-1.5 shrink-0 rounded-full bg-accent" />
+      {children}
+    </span>
+  )
 }
 
 function Block({ title, children }: { title: string; children: React.ReactNode }) {
@@ -51,8 +61,8 @@ function Block({ title, children }: { title: string; children: React.ReactNode }
       transition={{ duration: 0.3 }}
       className="overflow-hidden"
     >
-      <div className="space-y-5 rounded-2xl border border-line bg-surface/60 p-5">
-        <legend className="float-left w-full font-display-tight text-2xl font-bold">{title}</legend>
+      <div className="space-y-5 rounded-2xl border border-line bg-surface p-5">
+        <legend className="float-left w-full font-display-tight text-2xl font-bold"><Title>{title}</Title></legend>
         <div className="clear-both space-y-5">{children}</div>
       </div>
     </motion.fieldset>
@@ -108,7 +118,7 @@ export function Contact() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="glass-strong rounded-3xl p-6 sm:p-8">
+          <div data-tone="paper" className="rounded-3xl p-6 shadow-2xl shadow-black/20 sm:p-8">
             {sent ? (
               <div className="flex min-h-80 flex-col items-center justify-center gap-4 text-center">
                 <CheckCircle2 className="size-16 text-highlight" aria-hidden />
@@ -129,7 +139,7 @@ export function Contact() {
             ) : (
               <form onSubmit={onSubmit} className="space-y-6">
                 <fieldset className="space-y-4">
-                  <legend className="mb-3 font-display-tight text-2xl font-bold">1 · Tus datos</legend>
+                  <legend className="mb-3 font-display-tight text-2xl font-bold"><Title>1 · Tus datos</Title></legend>
                   <label className="block">
                     <Label>Nombre y apellidos</Label>
                     <input required name="name" autoComplete="name" className={field} />
@@ -172,7 +182,7 @@ export function Contact() {
                             onChange={() => setService(s.id)}
                             className="peer absolute inset-0 size-full cursor-pointer opacity-0"
                           />
-                          <span className="flex min-h-14 items-center rounded-2xl border border-line bg-canvas px-4 text-sm font-semibold text-fg transition-colors peer-checked:border-brand peer-checked:bg-brand peer-checked:text-on-brand peer-focus-visible:ring-2 peer-focus-visible:ring-highlight">
+                          <span className="flex min-h-14 items-center rounded-2xl border border-line bg-canvas px-4 text-sm font-semibold text-fg transition-colors peer-checked:border-brand peer-checked:bg-brand peer-checked:text-on-brand peer-checked:shadow-[0_0_0_3px_var(--color-accent)] peer-focus-visible:ring-2 peer-focus-visible:ring-highlight">
                             {s.label}
                           </span>
                         </label>
@@ -268,7 +278,7 @@ export function Contact() {
 
                 <fieldset className="space-y-4">
                   <legend className="mb-3 font-display-tight text-2xl font-bold">
-                    {svc ? (svc.training && svc.nutrition ? "4" : "3") : "2"} · Para terminar
+                    <Title>{svc ? (svc.training && svc.nutrition ? "4" : "3") : "2"} · Para terminar</Title>
                   </legend>
                   <label className="block">
                     <Label>¿Hay algo más que deba saber antes de empezar?</Label>

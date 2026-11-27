@@ -96,6 +96,21 @@
   color: var(--color-fg);
 }
 
+/* Tarjeta blanca dentro de una sección en cobalto: vuelve a los colores claros */
+[data-tone="paper"] {
+  --color-canvas: #ffffff;
+  --color-surface: #ffffff;
+  --color-raised: #eef3ff;
+  --color-line: #d0dcf8;
+  --color-fg: #0a1f66;
+  --color-muted: #46557f;
+  --color-highlight: #1b3fc4;
+  --color-brand: #1b3fc4;
+  --color-on-brand: #ffffff;
+  background-color: #ffffff;
+  color: var(--color-fg);
+}
+
 @layer base {
   html {
     background: var(--color-canvas);
