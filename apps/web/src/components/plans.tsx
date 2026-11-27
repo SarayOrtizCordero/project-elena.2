@@ -64,21 +64,20 @@ export function Plans() {
             const price = option.prices[r.months] as number;
             const saving = monthly * r.months - price;
             const regular = option.id === "lanzamiento" ? normal?.prices[r.months] : undefined;
-            const launch = option.id === "lanzamiento";
             return (
               <article
                 key={r.months}
-                className={cn("flex flex-col rounded-3xl border p-6", launch ? "border-brand bg-brand text-on-brand" : "glass")}
+                className="flex flex-col rounded-3xl border border-brand bg-brand p-6 text-on-brand"
               >
                 <h4 className="font-display text-2xl uppercase tracking-wide">{r.label}</h4>
                 <p className="mt-3 flex items-baseline gap-1">
                   <span className="font-display text-6xl leading-none">{eur(price)}</span>
-                  <span className={cn("text-sm", launch ? "text-on-brand/80" : "text-muted")}>{r.unit}</span>
+                  <span className="text-sm text-on-brand/80">{r.unit}</span>
                 </p>
-                <p className={cn("mt-2 min-h-5 text-sm", launch ? "text-on-brand/80" : "text-muted")}>
+                <p className="mt-2 min-h-5 text-sm text-on-brand/80">
                   {regular ? `Precio normal: ${eur(regular)}` : saving > 0 ? `Ahorras ${eur(saving)} frente al mensual` : ""}
                 </p>
-                <Button href="#contacto" variant={launch ? "primary" : "dark"} className="mt-6 w-full">
+                <Button href="#contacto" className="mt-6 w-full">
                   Empezar
                 </Button>
               </article>
