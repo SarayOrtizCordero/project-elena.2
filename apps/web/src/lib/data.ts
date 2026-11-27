@@ -69,65 +69,76 @@ export const steps = [
   { n: "04", title: "Ajustamos juntas", text: "Reviso tus datos y adapto el plan para que no te estanques nunca." },
 ];
 
-export type Plan = {
-  name: string;
-  price: number;
-  unit: string;
+/** Duración de cada tarifa, en meses. */
+export const periods = [
+  { months: 1, label: "Mes", unit: "/mes" },
+  { months: 3, label: "Trimestre", unit: "/trimestre" },
+  { months: 6, label: "Semestre", unit: "/semestre" },
+  { months: 12, label: "Año", unit: "/año" },
+] as const;
+
+export type Option = {
+  id: "nutricion" | "entreno" | "lanzamiento" | "pack";
+  tab: string;
+  title: string;
   badge?: string;
+  lead: string;
   features: string[];
-  featured?: boolean;
+  /** Precio por duración (meses → euros). Falta la clave si esa duración no existe. */
+  prices: Partial<Record<1 | 3 | 6 | 12, number>>;
 };
 
-export const plans: Record<"online" | "presencial" | "nutricion" | "combo", Plan[]> = {
-  online: [
-    { name: "Esencial", price: 29, unit: "/mes", features: ["Rutina personalizada", "Plan de comidas", "App de seguimiento", "Soporte por email"] },
-    {
-      name: "Pro",
-      price: 59,
-      unit: "/mes",
-      badge: "Más elegido",
-      featured: true,
-      features: ["Todo lo de Esencial", "Ajustes semanales", "Chat directo con Elena", "Revisión de técnica por vídeo", "Lista de la compra"],
-    },
-    { name: "Trimestral", price: 149, unit: "/3 meses", features: ["Todo lo de Pro", "Ahorra 28 €", "Sesión de videollamada", "Prioridad en respuestas"] },
-  ],
-  presencial: [
-    { name: "Bono 8", price: 120, unit: "· 8 sesiones", features: ["8 sesiones de entreno personal", "Técnica corregida al momento", "Rutina a tu medida", "Reserva de citas desde la app"] },
-    {
-      name: "Bono 10",
-      price: 140,
-      unit: "· 10 sesiones",
-      badge: "Más elegido",
-      featured: true,
-      features: ["10 sesiones de entreno personal", "Técnica corregida al momento", "Rutina a tu medida", "Reserva de citas desde la app"],
-    },
-    { name: "Bono 12", price: 160, unit: "· 12 sesiones", features: ["12 sesiones de entreno personal", "Técnica corregida al momento", "Rutina a tu medida", "Reserva de citas desde la app"] },
-  ],
-  nutricion: [
-    { name: "Plan base", price: 25, unit: "/mes", features: ["Plan de comidas personalizado", "Calorías y macros", "Lista de la compra", "Soporte por email"] },
-    {
-      name: "Seguimiento",
-      price: 45,
-      unit: "/mes",
-      badge: "Más elegido",
-      featured: true,
-      features: ["Todo lo del plan base", "Ajustes semanales", "Chat directo con Elena", "Revisión de tus registros"],
-    },
-    { name: "Trimestral", price: 120, unit: "/3 meses", features: ["Todo lo de Seguimiento", "Ahorro frente al mensual", "Videollamada de inicio", "Prioridad en respuestas"] },
-  ],
-  combo: [
-    { name: "Combo online", price: 69, unit: "/mes", features: ["Rutina + plan de comidas", "App de seguimiento", "Ajustes semanales", "Soporte por email"] },
-    {
-      name: "Combo presencial",
-      price: 150,
-      unit: "/mes",
-      badge: "Más elegido",
-      featured: true,
-      features: ["8 sesiones al mes", "Plan de nutrición completo", "Valoración y medidas", "Acceso a la app", "Chat directo con Elena"],
-    },
-    { name: "Combo total", price: 190, unit: "/mes", features: ["8 sesiones + online", "Nutrición con seguimiento", "Ajustes semanales", "Prioridad de agenda"] },
-  ],
-};
+const packFeatures = [
+  "Rutina y plan de comidas coordinados",
+  "Un solo seguimiento en tu app",
+  "Registro de series, pesos y comidas",
+  "Lista de la compra semanal",
+];
+
+export const options: Option[] = [
+  {
+    id: "lanzamiento",
+    tab: "Pack lanzamiento",
+    title: "Pack completo",
+    badge: "Lanzamiento · 20 plazas",
+    lead: "Entreno y nutrición en un solo plan. Precio especial para las primeras 20 plazas.",
+    features: packFeatures,
+    prices: { 1: 69, 3: 175, 6: 345, 12: 620 },
+  },
+  {
+    id: "pack",
+    tab: "Pack completo",
+    title: "Pack completo",
+    lead: "Entreno y nutrición en un solo plan, con un único seguimiento.",
+    features: packFeatures,
+    prices: { 1: 79, 3: 199, 6: 389, 12: 699 },
+  },
+  {
+    id: "entreno",
+    tab: "Solo entreno",
+    title: "Solo entreno",
+    lead: "Tu rutina en la app, con ajustes según tu progreso.",
+    features: ["Rutina personalizada", "Registro de series y pesos", "Vídeos de los ejercicios", "Ajustes según tu progreso"],
+    prices: { 1: 59, 3: 150, 6: 299 },
+  },
+  {
+    id: "nutricion",
+    tab: "Solo nutrición",
+    title: "Solo nutrición",
+    lead: "Plan de comidas a tu medida, con calorías y macros.",
+    features: ["Plan de comidas personalizado", "Calorías y macros", "Lista de la compra", "Seguimiento en la app"],
+    prices: { 1: 45, 3: 125, 6: 239 },
+  },
+];
+
+export type Bono = { name: string; sessions: number; price: number; badge?: string; featured?: boolean };
+
+/** Bonos de entreno personal presencial: pago único por bono. */
+export const bonos: Bono[] = [
+  { name: "Bono 8", sessions: 8, price: 120 },
+  { name: "Bono 10", sessions: 10, price: 140, badge: "Más elegido", featured: true },
+  { name: "Bono 12", sessions: 12, price: 160 },
+];
 
 export const transformations = [
   { name: "Lucía, 29", result: "-9 kg", time: "4 meses", mode: "Online" },
