@@ -20,6 +20,17 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Pantalla de carga: visible 1,5 s y se desvanece; oculta, no recibe toques */
+.splash {
+  animation: splash-out 0.35s ease 1.5s forwards;
+}
+@keyframes splash-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 .safe-bottom {
   padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
 }

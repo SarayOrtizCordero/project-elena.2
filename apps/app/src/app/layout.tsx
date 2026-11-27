@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Inter } from "next/font/google";
 import { MotionProvider } from "@elena/ui";
+import { Splash } from "@/components/splash";
 import { SwRegister } from "@/components/sw-register";
 import "./globals.css";
 
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${display.variable} ${sans.variable}`}>
       <body>
+        <Splash />
         <MotionProvider>{children}</MotionProvider>
         <SwRegister />
       </body>

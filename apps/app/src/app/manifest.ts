@@ -9,7 +9,8 @@ export default function manifest(): MetadataRoute.Manifest {
     scope: "/",
     display: "standalone",
     orientation: "portrait",
-    background_color: "#f3f7ff",
+    // Cobalto: la pantalla inicial de la app instalada enlaza con la pantalla de carga
+    background_color: "#1b3fc4",
     theme_color: "#f3f7ff",
     lang: "es",
     icons: [
