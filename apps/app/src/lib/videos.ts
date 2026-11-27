@@ -1,6 +1,10 @@
 // Vídeos SIMULADOS de técnica (demo): no hay archivos de vídeo, solo pasos, tiempos y consejos.
 
 export type VideoInfo = {
+  /** Vídeo real (archivo en /public). Si falta, se muestra el vídeo simulado. */
+  src?: string;
+  /** Imagen de portada del vídeo real. */
+  poster?: string;
   /** Duración mostrada, en segundos. */
   duration: number;
   /** Pasos que se muestran como subtítulos mientras "se reproduce". */
@@ -135,7 +139,9 @@ export const videoInfo: Record<string, VideoInfo> = {
     tip: "Hombros abajo y lejos de las orejas.",
   },
   "pull-4": {
-    duration: 26,
+    src: "/videos/pull-4-curl-biceps.mp4",
+    poster: "/videos/pull-4-curl-biceps.jpg",
+    duration: 20,
     steps: [
       "Codos pegados al cuerpo y mancuernas hacia delante.",
       "Sube sin balancear hasta contraer el bíceps.",

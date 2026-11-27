@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Play, Video } from "lucide-react";
 import { cn } from "@elena/ui";
 import { ElenaVideo } from "@/components/elena-video";
+import { TutorialVideo } from "@/components/tutorial-video";
 import { VideoSim } from "@/components/video-sim";
 import { DEMO_CLIENT, useApp, usePlan } from "@/lib/store";
 import { fallbackInfo, photoPositions, videoInfo, workoutPhoto } from "@/lib/videos";
@@ -68,6 +69,8 @@ export default function Videos() {
           <ElenaVideo id={sharedVideo.id} title={sharedVideo.title} />
         ) : current?.own ? (
           <ElenaVideo id={current.own.id} title={current.own.title} />
+        ) : current?.info.src ? (
+          <TutorialVideo name={current.name} src={current.info.src} poster={current.info.poster} info={current.info} />
         ) : current ? (
           <>
             <VideoSim name={current.name} muscle={current.muscle} photo={current.photo} position={current.position} info={current.info} />
@@ -136,12 +139,12 @@ export default function Videos() {
                 >
                   <span className="relative block aspect-video bg-black">
                     <Image
-                      src={e.photo}
+                      src={e.info.poster ?? e.photo}
                       alt=""
                       fill
                       sizes="(min-width: 1024px) 260px, 50vw"
                       className="object-cover saturate-[1.15] transition-transform duration-500 group-hover:scale-105"
-                      style={{ objectPosition: e.position }}
+                      style={{ objectPosition: e.info.poster ? "50% 25%" : e.position }}
                     />
                     <span aria-hidden className="absolute inset-0 bg-black/25" />
                     <span className="absolute left-1/2 top-1/2 grid size-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-accent text-on-accent">
