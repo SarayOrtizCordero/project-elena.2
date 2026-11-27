@@ -4,7 +4,9 @@ export const APP_URL =
   process.env.NEXT_PUBLIC_APP_URL ??
   (process.env.NODE_ENV === "production" ? "https://project-elena-2-app.vercel.app" : "http://localhost:3001");
 export const INSTAGRAM_URL = "https://www.instagram.com/eleniitaafit";
-export const WHATSAPP_URL = "https://wa.me/34600000000?text=Hola%20Elena%2C%20quiero%20info";
+/** PROVISIONAL: sustituir por el número real de Elena (prefijo de país, sin + ni espacios). */
+export const WHATSAPP_NUMBER = "34600000000";
+export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola Elena, quiero info")}`;
 
 export const nav = [
   { href: "#servicios", label: "Servicios" },
